@@ -1,0 +1,214 @@
+.container {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  background: var(--surface-1);
+  overflow: hidden;
+  font-family: var(--font-body);
+}
+
+.sidebar {
+  width: 200px;
+  min-width: 180px;
+  border-right: 1px solid var(--border-subtle);
+  background: rgba(10, 10, 10, 0.4);
+  padding: 16px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.sidebarSection {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sectionHeader {
+  font-family: var(--font-display);
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  color: var(--text-muted);
+  padding: 0 8px;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  font-size: 11px;
+  font-weight: 700;
+  transition: all var(--transition-fast);
+}
+
+.navItem:hover {
+  background: var(--surface-hover);
+  color: var(--text-primary);
+}
+
+.navItemActive {
+  background: var(--surface-2);
+  color: var(--accent);
+  border-left: 2px solid var(--accent);
+}
+
+.mainArea {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.toolbar {
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  border-bottom: 1px solid var(--border-subtle);
+  background: var(--surface-2);
+  gap: 12px;
+}
+
+.navControls {
+  display: flex;
+  gap: 4px;
+}
+
+.toolBtn {
+  width: 26px;
+  height: 26px;
+  border-radius: var(--radius-xs);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+}
+
+.toolBtn:hover {
+  background: var(--surface-hover);
+  color: var(--text-primary);
+}
+
+.pathBar {
+  flex: 1;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 4px 10px;
+  font-size: 11px;
+  color: var(--text-secondary);
+  font-family: var(--font-display);
+}
+
+.createBtn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--surface-1);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 4px 10px;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text-primary);
+  transition: all var(--transition-fast);
+}
+
+.createBtn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.fileGrid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: 16px;
+  padding: 20px;
+  overflow-y: auto;
+  align-content: flex-start;
+}
+
+.fileCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 14px 10px;
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
+  border: 1px solid var(--border-subtle);
+  cursor: pointer;
+  position: relative;
+  transition: all var(--transition-fast);
+}
+
+.fileCard:hover {
+  border-color: var(--border-medium);
+  transform: translateY(-2px);
+}
+
+.selectedCard {
+  border-color: var(--accent);
+  background: rgba(255, 59, 48, 0.1);
+  box-shadow: 0 0 12px var(--accent-glow);
+}
+
+.iconWrapper {
+  color: var(--text-primary);
+}
+
+.selectedCard .iconWrapper {
+  color: var(--accent);
+}
+
+.fileName {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 90px;
+}
+
+.fileMeta {
+  font-size: 9px;
+  color: var(--text-muted);
+}
+
+.deleteIcon {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  opacity: 0;
+  color: var(--text-muted);
+  transition: all var(--transition-fast);
+}
+
+.fileCard:hover .deleteIcon {
+  opacity: 1;
+}
+
+.deleteIcon:hover {
+  color: var(--accent);
+}
+
+.footer {
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  border-top: 1px solid var(--border-subtle);
+  background: var(--surface-2);
+  font-size: 10px;
+  color: var(--text-muted);
+  font-family: var(--font-display);
+}

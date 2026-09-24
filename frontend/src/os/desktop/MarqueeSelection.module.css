@@ -1,0 +1,8 @@
+.marqueeBox {
+  position: fixed;
+  border: 1px dashed var(--accent);
+  background: rgba(255, 59, 48, 0.08);
+  pointer-events: none;
+  z-index: 1000;
+  border-radius: var(--radius-xs);
+}

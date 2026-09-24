@@ -21,8 +21,6 @@
 
 .maximized {
   border-radius: 0 !important;
-  border-left: none;
-  border-right: none;
   border-top: none;
 }
 
@@ -97,15 +95,75 @@
   background: var(--surface-1);
 }
 
-.resizeHandle {
+/* 8-Directional Resizing */
+.resizeBorder {
   position: absolute;
-  right: 0;
+  z-index: 100;
+  touch-action: none;
+}
+
+.resizeN {
+  top: 0;
+  left: 8px;
+  right: 8px;
+  height: 6px;
+  cursor: n-resize;
+}
+
+.resizeS {
   bottom: 0;
+  left: 8px;
+  right: 8px;
+  height: 6px;
+  cursor: s-resize;
+}
+
+.resizeE {
+  top: 8px;
+  bottom: 8px;
+  right: 0;
+  width: 6px;
+  cursor: e-resize;
+}
+
+.resizeW {
+  top: 8px;
+  bottom: 8px;
+  left: 0;
+  width: 6px;
+  cursor: w-resize;
+}
+
+.resizeCorner {
+  position: absolute;
   width: 14px;
   height: 14px;
-  cursor: nwse-resize;
+  z-index: 101;
   touch-action: none;
-  z-index: 10;
+}
+
+.resizeNW {
+  top: 0;
+  left: 0;
+  cursor: nw-resize;
+}
+
+.resizeNE {
+  top: 0;
+  right: 0;
+  cursor: ne-resize;
+}
+
+.resizeSW {
+  bottom: 0;
+  left: 0;
+  cursor: sw-resize;
+}
+
+.resizeSE {
+  bottom: 0;
+  right: 0;
+  cursor: se-resize;
   background: linear-gradient(135deg, transparent 50%, var(--border-medium) 50%, transparent 60%, var(--border-medium) 60%);
 }
 

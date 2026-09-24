@@ -1,0 +1,43 @@
+.previewZone {
+  position: fixed;
+  z-index: 999998;
+  background: rgba(255, 59, 48, 0.08);
+  border: 2px dashed var(--accent);
+  backdrop-filter: blur(4px);
+  border-radius: var(--radius-md);
+  pointer-events: none;
+  animation: glowPulse 1.2s infinite alternate ease-in-out;
+  transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.snapLeft {
+  top: 8px;
+  left: 8px;
+  width: calc(50vw - 12px);
+  height: calc(100vh - 96px);
+}
+
+.snapRight {
+  top: 8px;
+  left: calc(50vw + 4px);
+  width: calc(50vw - 12px);
+  height: calc(100vh - 96px);
+}
+
+.snapTop {
+  top: 8px;
+  left: 8px;
+  width: calc(100vw - 16px);
+  height: calc(100vh - 96px);
+}
+
+@keyframes glowPulse {
+  from {
+    background: rgba(255, 59, 48, 0.06);
+    box-shadow: 0 0 10px rgba(255, 59, 48, 0.2);
+  }
+  to {
+    background: rgba(255, 59, 48, 0.14);
+    box-shadow: 0 0 24px var(--accent-glow);
+  }
+}

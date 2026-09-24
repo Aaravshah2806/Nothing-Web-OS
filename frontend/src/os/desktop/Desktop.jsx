@@ -3,8 +3,12 @@ import { useDesktopStore } from '../../store/useDesktopStore';
 import { useWindowStore } from '../../store/useWindowStore';
 import { APP_REGISTRY } from '../../apps/appRegistry';
 import WidgetGrid from './WidgetGrid';
+import DesktopIcons from './DesktopIcons';
+import MarqueeSelection from './MarqueeSelection';
 import WindowManager from '../window-manager/WindowManager';
-import { Sliders, RefreshCw, LayoutGrid, Lock, FileText, Monitor } from 'lucide-react';
+import SnapPreviewOverlay from '../window-manager/SnapPreviewOverlay';
+import AltTabSwitcher from '../window-manager/AltTabSwitcher';
+import { Sliders, LayoutGrid, Lock, FileText, Monitor, Terminal } from 'lucide-react';
 import styles from './Desktop.module.css';
 
 export default function Desktop() {
@@ -29,7 +33,7 @@ export default function Desktop() {
     openContextMenu(e.clientX, e.clientY);
   };
 
-  const handleDesktopClick = (e) => {
+  const handleDesktopClick = () => {
     if (desktopContextMenu.visible) {
       closeContextMenu();
     }
@@ -63,11 +67,23 @@ export default function Desktop() {
       onContextMenu={handleContextMenu}
       onClick={handleDesktopClick}
     >
+      {/* Desktop File Icons */}
+      <DesktopIcons />
+
+      {/* Marquee Rubberband Box Selection */}
+      <MarqueeSelection />
+
       {/* Interactive Widget Layer */}
       <WidgetGrid />
 
       {/* Dynamic Window Manager */}
       <WindowManager />
+
+      {/* Edge Snapping Preview Overlay */}
+      <SnapPreviewOverlay />
+
+      {/* Alt + Tab Task Switcher */}
+      <AltTabSwitcher />
 
       {/* Custom Desktop Context Menu */}
       {desktopContextMenu.visible && (
@@ -85,13 +101,13 @@ export default function Desktop() {
 
           <button
             onClick={() => {
-              openApp(APP_REGISTRY.settings);
+              openApp(APP_REGISTRY.terminal);
               closeContextMenu();
             }}
             className={styles.menuItem}
           >
-            <LayoutGrid size={14} />
-            <span>WIDGET SETTINGS</span>
+            <Terminal size={14} />
+            <span>OPEN TERMINAL</span>
           </button>
 
           <button
@@ -103,6 +119,17 @@ export default function Desktop() {
           >
             <FileText size={14} />
             <span>NEW NOTE</span>
+          </button>
+
+          <button
+            onClick={() => {
+              openApp(APP_REGISTRY.settings);
+              closeContextMenu();
+            }}
+            className={styles.menuItem}
+          >
+            <LayoutGrid size={14} />
+            <span>WIDGET SETTINGS</span>
           </button>
 
           <div className={styles.divider} />

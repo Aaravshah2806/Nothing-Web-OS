@@ -1,9 +1,11 @@
-import { FileText, Calculator, Sliders, Image, Disc } from 'lucide-react';
+import { FileText, Calculator, Sliders, Image, Disc, Terminal, Folder } from 'lucide-react';
 import NotesApp from './notes/NotesApp';
 import CalculatorApp from './calculator/CalculatorApp';
 import SettingsApp from './settings/SettingsApp';
 import GalleryApp from './gallery/GalleryApp';
 import MusicApp from './music/MusicApp';
+import TerminalApp from './terminal/TerminalApp';
+import FileManagerApp from './files/FileManagerApp';
 
 export const APP_REGISTRY = {
   notes: {
@@ -22,6 +24,24 @@ export const APP_REGISTRY = {
     component: CalculatorApp,
     defaultWidth: 320,
     defaultHeight: 460,
+    pinned: true,
+  },
+  files: {
+    id: 'files',
+    name: 'FILES',
+    icon: Folder,
+    component: FileManagerApp,
+    defaultWidth: 680,
+    defaultHeight: 480,
+    pinned: true,
+  },
+  terminal: {
+    id: 'terminal',
+    name: 'TERMINAL',
+    icon: Terminal,
+    component: TerminalApp,
+    defaultWidth: 640,
+    defaultHeight: 420,
     pinned: true,
   },
   gallery: {
