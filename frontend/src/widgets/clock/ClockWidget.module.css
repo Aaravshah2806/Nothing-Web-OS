@@ -1,0 +1,66 @@
+.widget {
+  background: var(--surface-1);
+  backdrop-filter: var(--backdrop-blur-md);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 20px 24px;
+  box-shadow: var(--shadow-widget);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  user-select: none;
+  min-width: 280px;
+}
+
+.timeRow {
+  display: flex;
+  align-items: baseline;
+  font-family: var(--font-display);
+  letter-spacing: 2px;
+}
+
+.digit {
+  font-size: 52px;
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+.colon {
+  font-size: 50px;
+  color: var(--accent);
+  margin: 0 4px;
+  animation: blink 1s step-start infinite;
+  line-height: 1;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0.2;
+  }
+}
+
+.sec {
+  font-size: 18px;
+  color: var(--text-secondary);
+  margin-left: 8px;
+  font-family: var(--font-body);
+}
+
+.dateRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  color: var(--text-secondary);
+}
+
+.accentBadge {
+  background: var(--accent);
+  color: #FFFFFF;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: var(--radius-xs);
+  font-size: 10px;
+}

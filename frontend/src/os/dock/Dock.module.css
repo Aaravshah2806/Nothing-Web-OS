@@ -1,0 +1,110 @@
+.dockContainer {
+  position: fixed;
+  bottom: 16px;
+  left: 0;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.dockPill {
+  height: 64px;
+  background: var(--surface-2);
+  backdrop-filter: var(--backdrop-blur-md);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-dock);
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  pointer-events: auto;
+  user-select: none;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.dockPill:hover {
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), 0 0 0 1px var(--border-medium);
+}
+
+.appsList {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dockItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 48px;
+  position: relative;
+  transition: transform var(--transition-fast);
+}
+
+.dockItem:hover {
+  transform: translateY(-4px) scale(1.1);
+}
+
+.iconBox {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-sm);
+  background: var(--surface-1);
+  border: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-primary);
+  transition: background var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast);
+}
+
+.dockItem:hover .iconBox {
+  border-color: var(--border-medium);
+  background: var(--surface-hover);
+}
+
+.focusedItem .iconBox {
+  border-color: var(--border-glass);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.activeDot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--accent);
+  margin-top: 4px;
+  opacity: 0;
+  transform: scale(0.6);
+  transition: all var(--transition-fast);
+}
+
+.activeDotVisible {
+  opacity: 1;
+  transform: scale(1);
+  box-shadow: 0 0 6px var(--accent-glow);
+}
+
+.searchItem .iconBox {
+  background: rgba(0, 0, 0, 0.3);
+  color: var(--text-secondary);
+}
+
+.shortcutHint {
+  position: absolute;
+  bottom: 0;
+  font-size: 8px;
+  font-family: var(--font-display);
+  color: var(--text-muted);
+}
+
+.divider {
+  width: 1px;
+  height: 28px;
+  background: var(--border-subtle);
+}

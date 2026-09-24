@@ -1,0 +1,120 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background-color: #050505;
+  background-image: 
+    radial-gradient(rgba(255, 255, 255, 0.08) 1.5px, transparent 1.5px),
+    radial-gradient(circle at 50% 50%, rgba(255, 59, 48, 0.05) 0%, transparent 60%);
+  background-size: 24px 24px, 100% 100%;
+  backdrop-filter: blur(20px);
+  z-index: 9999999;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 40px;
+  cursor: pointer;
+  user-select: none;
+  animation: fadeIn 0.25s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.topStatus {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--text-secondary);
+  font-family: var(--font-body);
+  font-size: 11px;
+}
+
+.osLogo {
+  font-family: var(--font-display);
+  font-size: 14px;
+  letter-spacing: 2px;
+  color: var(--text-primary);
+}
+
+.statusRight {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.accentColor {
+  color: var(--accent);
+}
+
+.batText {
+  font-family: var(--font-display);
+}
+
+.centerClock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  transform: translateY(-20px);
+}
+
+.timeDisplay {
+  font-family: var(--font-display);
+  font-size: 110px;
+  letter-spacing: 4px;
+  line-height: 1;
+  color: #FFFFFF;
+  display: flex;
+  align-items: baseline;
+}
+
+.colon {
+  color: var(--accent);
+  margin: 0 4px;
+  animation: pulse 1s step-start infinite;
+}
+
+@keyframes pulse {
+  50% { opacity: 0.2; }
+}
+
+.dateDisplay {
+  font-family: var(--font-body);
+  font-size: 14px;
+  letter-spacing: 3px;
+  color: var(--text-secondary);
+}
+
+.unlockPrompt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-secondary);
+}
+
+.unlockArrow {
+  animation: bounce 1.8s infinite;
+  color: var(--accent);
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.unlockText {
+  font-family: var(--font-display);
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: var(--text-secondary);
+}

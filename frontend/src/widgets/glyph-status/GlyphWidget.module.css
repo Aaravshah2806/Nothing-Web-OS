@@ -1,0 +1,81 @@
+.widget {
+  background: var(--surface-1);
+  backdrop-filter: var(--backdrop-blur-md);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  box-shadow: var(--shadow-widget);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  user-select: none;
+  min-width: 280px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.titleWrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.accentIcon {
+  color: var(--accent);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  color: var(--text-primary);
+}
+
+.statusLive {
+  font-family: var(--font-body);
+  font-size: 9px;
+  color: var(--accent);
+  letter-spacing: 1px;
+}
+
+.strip {
+  display: flex;
+  gap: 5px;
+  background: #000000;
+  padding: 8px 10px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-subtle);
+}
+
+.segment {
+  flex: 1;
+  height: 8px;
+  background: #222222;
+  border-radius: 1px;
+  transition: all 0.15s ease;
+}
+
+.segmentPulse {
+  background: var(--accent);
+  box-shadow: 0 0 10px var(--accent-glow), 0 0 2px var(--accent);
+  transform: scaleY(1.2);
+}
+
+.metrics {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-body);
+  font-size: 10px;
+  color: var(--text-secondary);
+}
+
+.metricItem {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}

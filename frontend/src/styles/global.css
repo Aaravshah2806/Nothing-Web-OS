@@ -1,0 +1,156 @@
+@import './tokens.css';
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html, body, #root {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  user-select: none;
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 14px;
+}
+
+::selection {
+  background-color: var(--accent);
+  color: #FFFFFF;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-medium);
+  border-radius: var(--radius-xs);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* Focus styles for keyboard accessibility */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+button {
+  font-family: inherit;
+  color: inherit;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+input, textarea {
+  font-family: inherit;
+  color: inherit;
+  outline: none;
+}
+
+/* Procedural Wallpapers */
+.wallpaper-dot-grid {
+  background-color: var(--bg-base);
+  background-image: radial-gradient(rgba(255, 255, 255, 0.12) 1.5px, transparent 1.5px);
+  background-size: 24px 24px;
+}
+
+[data-theme="light"] .wallpaper-dot-grid {
+  background-color: var(--bg-base);
+  background-image: radial-gradient(rgba(0, 0, 0, 0.12) 1.5px, transparent 1.5px);
+  background-size: 24px 24px;
+}
+
+.wallpaper-glyph-lines {
+  background-color: #050505;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    radial-gradient(circle at 80% 20%, rgba(255, 59, 48, 0.08) 0%, transparent 40%),
+    radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.03) 0%, transparent 40%);
+  background-size: 48px 48px, 48px 48px, 100% 100%, 100% 100%;
+}
+
+.wallpaper-minimal-gradient {
+  background: radial-gradient(circle at 50% 50%, #171717 0%, #080808 100%);
+}
+
+[data-theme="light"] .wallpaper-minimal-gradient {
+  background: radial-gradient(circle at 50% 50%, #FFFFFF 0%, #E8E8E8 100%);
+}
+
+/* Mobile / Small Screen Warning Banner (< 1280px viewport per PRD) */
+.viewport-warning {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  background: #0A0A0A;
+  color: #F5F5F5;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+  text-align: center;
+}
+
+.viewport-warning-title {
+  font-family: var(--font-display);
+  font-size: 28px;
+  letter-spacing: 2px;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+
+.viewport-warning-text {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--text-secondary);
+  max-width: 440px;
+  line-height: 1.6;
+}
+
+@media (max-width: 1024px) {
+  .viewport-warning {
+    display: flex;
+  }
+}
+
+/* Dot-matrix effect utilities */
+.dot-font {
+  font-family: var(--font-display);
+  letter-spacing: 1px;
+}
+
+.pixel-font {
+  font-family: var(--font-pixel);
+}
+
+.mono-font {
+  font-family: var(--font-body);
+}
+
+/* Subtle glow animations */
+@keyframes glyph-pulse {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(0.98);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+    box-shadow: 0 0 12px var(--accent);
+  }
+}

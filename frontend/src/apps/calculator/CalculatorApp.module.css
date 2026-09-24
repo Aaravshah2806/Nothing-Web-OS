@@ -1,0 +1,98 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  background: var(--surface-1-solid);
+  padding: 16px;
+  gap: 16px;
+  user-select: none;
+}
+
+.displayPanel {
+  background: #000000;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+  height: 90px;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.8);
+}
+
+.subEquation {
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: var(--text-muted);
+  min-height: 16px;
+  letter-spacing: 1px;
+}
+
+.mainDisplay {
+  font-family: var(--font-display);
+  font-size: 32px;
+  color: #FFFFFF;
+  letter-spacing: 2px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+.keypad {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  flex: 1;
+}
+
+.btn {
+  background: var(--surface-2);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background var(--transition-fast), transform var(--transition-fast), border-color var(--transition-fast);
+}
+
+.btn:hover {
+  background: var(--surface-hover);
+  border-color: var(--border-medium);
+}
+
+.btn:active {
+  transform: scale(0.96);
+  background: var(--surface-active);
+}
+
+.btnAction {
+  color: var(--accent);
+}
+
+.btnAction:hover {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+}
+
+.btnOp {
+  color: var(--text-secondary);
+}
+
+.btnEquals {
+  background: var(--accent);
+  color: #FFFFFF;
+  border-color: var(--accent);
+  box-shadow: 0 0 12px var(--accent-glow);
+}
+
+.btnEquals:hover {
+  background: #FF544A;
+}

@@ -1,0 +1,235 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  background: var(--surface-1);
+  padding: 16px;
+  user-select: none;
+  font-family: var(--font-body);
+}
+
+.visualizerArea {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background: #000000;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  height: 120px;
+}
+
+.glyphDisc {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #262626 20%, #0A0A0A 80%);
+  border: 2px dashed rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform var(--transition-fast);
+}
+
+.rotating {
+  animation: spin 6s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.discInner {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #141414;
+  border: 1px solid var(--border-medium);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.discCenterDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.equalizerBars {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  height: 60px;
+}
+
+.eqBar {
+  width: 4px;
+  height: 10%;
+  background: var(--text-secondary);
+  border-radius: 2px;
+  transition: height 0.2s ease;
+}
+
+.eqBarAnimated {
+  animation: equalize 0.8s ease-in-out infinite alternate;
+  background: var(--accent);
+  box-shadow: 0 0 6px var(--accent-glow);
+}
+
+@keyframes equalize {
+  0% {
+    height: 15%;
+  }
+  100% {
+    height: var(--bar-height);
+  }
+}
+
+.trackDetails {
+  margin-top: 16px;
+  text-align: center;
+}
+
+.trackTitle {
+  font-family: var(--font-display);
+  font-size: 16px;
+  letter-spacing: 1.5px;
+  color: var(--text-primary);
+}
+
+.trackArtist {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.scrubberWrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.timeTag {
+  font-size: 10px;
+  color: var(--text-secondary);
+  font-family: var(--font-display);
+}
+
+.scrubberTrack {
+  flex: 1;
+  height: 6px;
+  background: var(--surface-2);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.scrubberFill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: var(--radius-pill);
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  margin-top: 16px;
+}
+
+.controlBtn, .secondaryBtn {
+  color: var(--text-secondary);
+  transition: all var(--transition-fast);
+}
+
+.controlBtn:hover, .secondaryBtn:hover {
+  color: var(--text-primary);
+  transform: scale(1.1);
+}
+
+.playBtn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 14px var(--accent-glow);
+  transition: transform var(--transition-fast);
+}
+
+.playBtn:hover {
+  transform: scale(1.08);
+}
+
+.playlist {
+  flex: 1;
+  overflow-y: auto;
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 10px;
+}
+
+.playItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all var(--transition-fast);
+}
+
+.playItem:hover {
+  background: var(--surface-hover);
+  border-color: var(--border-medium);
+}
+
+.activePlayItem {
+  border-color: var(--accent);
+  background: rgba(255, 59, 48, 0.08);
+}
+
+.playItemIndex {
+  font-family: var(--font-display);
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.playItemInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.playItemTitle {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.playItemArtist {
+  font-size: 10px;
+  color: var(--text-muted);
+}
+
+.playItemDuration {
+  font-size: 10px;
+  color: var(--text-secondary);
+  font-family: var(--font-display);
+}
