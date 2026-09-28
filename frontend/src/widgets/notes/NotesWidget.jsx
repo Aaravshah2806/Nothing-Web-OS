@@ -1,28 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { FileText, ArrowUpRight } from 'lucide-react';
 import { useWindowStore } from '../../store/useWindowStore';
+import { useDesktopStore } from '../../store/useDesktopStore';
 import { APP_REGISTRY } from '../../apps/appRegistry';
 import styles from './NotesWidget.module.css';
 
 export default function NotesWidget() {
-  const [quickNote, setQuickNote] = useState(() => {
-    try {
-      const saved = localStorage.getItem('glyph_quick_note');
-      return saved || 'Quick thought:\n- Check Nothing OS specs\n- Configure Supabase RLS\n- Deploy Glyph OS (1)';
-    } catch {
-      return 'Quick thought:\n- Check Nothing OS specs';
-    }
-  });
-
+  const { quickNote, setQuickNote } = useDesktopStore();
   const openApp = useWindowStore((state) => state.openApp);
-
-  useEffect(() => {
-    try {
-      localStorage.setItem('glyph_quick_note', quickNote);
-    } catch (e) {
-      console.error(e);
-    }
-  }, [quickNote]);
 
   return (
     <div className={styles.widget}>
@@ -45,8 +30,9 @@ export default function NotesWidget() {
         onChange={(e) => setQuickNote(e.target.value)}
         placeholder="Type a desktop note..."
         className={styles.textarea}
+        spellCheck="false"
       />
-      <div className={styles.footer}>AUTO-SAVED TO DISK</div>
+      <div className={styles.footer}>AUTO-SAVED • SYNCED TO NOTES</div>
     </div>
   );
 }

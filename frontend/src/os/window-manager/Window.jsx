@@ -68,7 +68,6 @@ export default function Window({ windowData, app }) {
     let currentY = y;
     if (maximized || snapState !== 'none') {
       const restoredW = windowData.prevBounds?.width || 560;
-      const restoredH = windowData.prevBounds?.height || 420;
       currentX = Math.max(20, Math.min(window.innerWidth - restoredW - 20, e.clientX - Math.floor(restoredW / 2)));
       currentY = 20;
       snapWindow(id, 'none');

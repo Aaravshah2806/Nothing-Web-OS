@@ -1,6 +1,17 @@
 import React, { useState } from 'react';
-import { Palette, LayoutGrid, Info, Check, Sun, Moon, Sparkles } from 'lucide-react';
+import {
+  Palette,
+  LayoutGrid,
+  Info,
+  Check,
+  Sun,
+  Moon,
+  Volume2,
+  VolumeX,
+  RotateCcw,
+} from 'lucide-react';
 import { useDesktopStore } from '../../store/useDesktopStore';
+import { playNotificationChime } from '../../lib/soundEngine';
 import styles from './SettingsApp.module.css';
 
 const WALLPAPERS = [
@@ -36,7 +47,25 @@ export default function SettingsApp() {
     setAccentColor,
     activeWidgets,
     toggleWidget,
+    soundVolume,
+    setSoundVolume,
+    soundMuted,
+    setSoundMuted,
+    resetDesktopLayout,
+    addNotification,
   } = useDesktopStore();
+
+  const handleResetLayout = () => {
+    resetDesktopLayout();
+    addNotification({
+      title: 'DESKTOP RESET',
+      message: 'Restored widgets and desktop icons to default layout.',
+    });
+  };
+
+  const handleTestSound = () => {
+    playNotificationChime();
+  };
 
   return (
     <div className={styles.container}>
@@ -55,7 +84,7 @@ export default function SettingsApp() {
           className={`${styles.tabBtn} ${activeTab === 'widgets' ? styles.activeTab : ''}`}
         >
           <LayoutGrid size={16} />
-          <span>WIDGETS</span>
+          <span>WIDGETS & DESKTOP</span>
         </button>
         <button
           onClick={() => setActiveTab('about')}
@@ -122,6 +151,39 @@ export default function SettingsApp() {
                 </button>
               ))}
             </div>
+
+            <h3 className={styles.sectionTitle} style={{ marginTop: '28px' }}>AUDIO & SOUND FEEDBACK</h3>
+            <div className={styles.soundControlBox}>
+              <div className={styles.soundRow}>
+                <button
+                  onClick={() => setSoundMuted(!soundMuted)}
+                  className={styles.soundMuteBtn}
+                  title={soundMuted ? 'Unmute Sound' : 'Mute Sound'}
+                >
+                  {soundMuted ? <VolumeX size={16} /> : <Volume2 size={16} />}
+                  <span>{soundMuted ? 'MUTED' : 'ENABLED'}</span>
+                </button>
+
+                <input
+                  type="range"
+                  min="0"
+                  max="1"
+                  step="0.05"
+                  value={soundMuted ? 0 : soundVolume}
+                  onChange={(e) => {
+                    if (soundMuted) setSoundMuted(false);
+                    setSoundVolume(parseFloat(e.target.value));
+                  }}
+                  className={styles.soundSlider}
+                />
+
+                <span className={styles.soundVolumeVal}>{Math.round(soundVolume * 100)}%</span>
+
+                <button onClick={handleTestSound} className={styles.testSoundBtn}>
+                  TEST AUDIO
+                </button>
+              </div>
+            </div>
           </div>
         )}
 
@@ -129,7 +191,7 @@ export default function SettingsApp() {
           <div className={styles.section}>
             <h3 className={styles.sectionTitle}>DESKTOP WIDGET ENGINE</h3>
             <p className={styles.sectionSubtitle}>
-              Toggle which widgets are displayed on the home desktop grid.
+              Toggle which widgets are displayed on the home desktop grid. Widgets are freely draggable with 8px grid snapping.
             </p>
             <div className={styles.widgetList}>
               {AVAILABLE_WIDGETS.map((w) => {
@@ -150,6 +212,13 @@ export default function SettingsApp() {
                 );
               })}
             </div>
+
+            <div style={{ marginTop: 24, paddingTop: 16, borderTop: '1px solid var(--border-subtle)' }}>
+              <button onClick={handleResetLayout} className={styles.resetLayoutBtn}>
+                <RotateCcw size={14} />
+                <span>RESET DESKTOP & WIDGET LAYOUT TO DEFAULT</span>
+              </button>
+            </div>
           </div>
         )}
 
@@ -158,7 +227,7 @@ export default function SettingsApp() {
             <h3 className={styles.sectionTitle}>GLYPH OS SPECIFICATIONS</h3>
             <div className={styles.aboutCard}>
               <div className={styles.aboutLogo}>GLYPH OS (1)</div>
-              <p className={styles.aboutVersion}>Version 1.0.0 (Web Desktop Edition)</p>
+              <p className={styles.aboutVersion}>Version 1.2.0 (Web Desktop Workstation Edition)</p>
               <div className={styles.specsTable}>
                 <div className={styles.specRow}>
                   <span className={styles.specKey}>DESIGN INSPIRATION</span>
@@ -166,19 +235,27 @@ export default function SettingsApp() {
                 </div>
                 <div className={styles.specRow}>
                   <span className={styles.specKey}>FRONTEND STACK</span>
-                  <span className={styles.specVal}>React, Vite, Zustand, Vanilla CSS</span>
+                  <span className={styles.specVal}>React 19, Vite 8, Zustand 5, Web Audio API</span>
                 </div>
                 <div className={styles.specRow}>
-                  <span className={styles.specKey}>TYPOGRAPHY</span>
-                  <span className={styles.specVal}>DotGothic16 & Space Mono</span>
+                  <span className={styles.specKey}>PRODUCTIVITY APPS</span>
+                  <span className={styles.specVal}>Notes (Markdown), Focus Timer, Dictaphone, Dev Tools</span>
                 </div>
                 <div className={styles.specRow}>
-                  <span className={styles.specKey}>BACKEND TIER</span>
-                  <span className={styles.specVal}>Express.js REST API + Supabase Auth & Storage</span>
+                  <span className={styles.specKey}>HARDWARE SIMULATOR</span>
+                  <span className={styles.specVal}>Interactive Glyph Matrix Composer & LED strip</span>
                 </div>
                 <div className={styles.specRow}>
-                  <span className={styles.specKey}>TARGET VIEWPORT</span>
-                  <span className={styles.specVal}>Laptop & Desktop (1280px+)</span>
+                  <span className={styles.specKey}>AUDIO ENGINE</span>
+                  <span className={styles.specVal}>Procedural Cyber Synth & Ambient Noise Generator</span>
+                </div>
+                <div className={styles.specRow}>
+                  <span className={styles.specKey}>KEYBOARD SHORTCUTS</span>
+                  <span className={styles.specVal}>Cmd/Ctrl+K (Spotlight), Alt+Arrows (Window Tiling)</span>
+                </div>
+                <div className={styles.specRow}>
+                  <span className={styles.specKey}>PERSISTENCE</span>
+                  <span className={styles.specVal}>Zustand LocalStorage Middleware + Supabase Ready</span>
                 </div>
               </div>
             </div>

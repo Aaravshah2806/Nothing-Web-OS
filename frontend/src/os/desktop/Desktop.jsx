@@ -23,6 +23,30 @@ export default function Desktop() {
   } = useDesktopStore();
 
   const openApp = useWindowStore((state) => state.openApp);
+  const tileFocusedWindow = useWindowStore((state) => state.tileFocusedWindow);
+
+  // Keyboard window tiling shortcuts (Alt + Left/Right/Up/Down)
+  React.useEffect(() => {
+    const handleGlobalKeys = (e) => {
+      if (e.altKey) {
+        if (e.key === 'ArrowLeft') {
+          e.preventDefault();
+          tileFocusedWindow('left');
+        } else if (e.key === 'ArrowRight') {
+          e.preventDefault();
+          tileFocusedWindow('right');
+        } else if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          tileFocusedWindow('up');
+        } else if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          tileFocusedWindow('down');
+        }
+      }
+    };
+    window.addEventListener('keydown', handleGlobalKeys);
+    return () => window.removeEventListener('keydown', handleGlobalKeys);
+  }, [tileFocusedWindow]);
 
   const handleContextMenu = (e) => {
     // Only trigger if clicking on desktop background or widget layer (not inside an app window)

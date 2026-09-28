@@ -304,3 +304,82 @@
   color: var(--text-primary);
   font-weight: 700;
 }
+
+/* Sound Control Box */
+.soundControlBox {
+  background: var(--surface-2);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+}
+
+.soundRow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.soundMuteBtn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--surface-1);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.soundSlider {
+  flex: 1;
+  height: 4px;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+.soundVolumeVal {
+  font-family: var(--font-display);
+  font-size: 12px;
+  color: var(--text-primary);
+  min-width: 36px;
+}
+
+.testSoundBtn {
+  background: var(--surface-1);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-display);
+  font-size: 10px;
+  cursor: pointer;
+}
+
+.testSoundBtn:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.resetLayoutBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface-2);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  padding: 10px 16px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-display);
+  font-size: 11px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.resetLayoutBtn:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: var(--surface-hover);
+}

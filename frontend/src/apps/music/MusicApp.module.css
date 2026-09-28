@@ -171,6 +171,20 @@
   transform: scale(1.08);
 }
 
+.volumeMini {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-secondary);
+}
+
+.volumeRange {
+  width: 60px;
+  height: 4px;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
 .playlist {
   flex: 1;
   overflow-y: auto;

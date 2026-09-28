@@ -1,0 +1,237 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  background: var(--surface-1-solid);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  user-select: none;
+  overflow: hidden;
+}
+
+/* Mode Bar */
+.modeBar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border-subtle);
+  overflow-x: auto;
+  background: var(--surface-1);
+}
+
+.modeBtn {
+  padding: 6px 12px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-subtle);
+  background: var(--surface-2);
+  color: var(--text-secondary);
+  font-family: var(--font-body);
+  font-size: 10px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all var(--transition-fast);
+}
+
+.modeBtn:hover {
+  background: var(--surface-hover);
+  color: var(--text-primary);
+}
+
+.activeModeBtn {
+  background: var(--text-primary);
+  color: var(--text-inverse);
+  border-color: var(--text-primary);
+  font-weight: bold;
+}
+
+/* Dial Stage */
+.dialStage {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  position: relative;
+}
+
+.glyphRing {
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ringSegment {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 14px;
+  margin-left: -2.5px;
+  margin-top: -7px;
+  border-radius: 3px;
+  background: #252525;
+  transition: all 0.2s ease;
+}
+
+.ringSegmentActive {
+  background: #ffffff;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+.timeCenter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 2;
+}
+
+.digitDisplay {
+  font-family: var(--font-display);
+  font-size: 44px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.colonBlink {
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.2; }
+}
+
+.modeLabel {
+  font-size: 11px;
+  color: var(--text-secondary);
+  letter-spacing: 1px;
+  margin-top: 4px;
+}
+
+/* Controls */
+.controlsRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 12px 20px;
+}
+
+.mainControlBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 28px;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  border: 1px solid transparent;
+}
+
+.startBtn {
+  background: var(--text-primary);
+  color: var(--text-inverse);
+}
+
+.startBtn:hover {
+  transform: scale(1.03);
+}
+
+.pauseBtn {
+  background: var(--surface-2);
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.resetBtn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface-2);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.resetBtn:hover {
+  background: var(--surface-hover);
+  color: var(--text-primary);
+}
+
+/* Footer & Ambient Audio */
+.footerPanel {
+  padding: 14px 18px;
+  border-top: 1px solid var(--border-subtle);
+  background: var(--surface-1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ambientGroup {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.panelLabel {
+  font-size: 10px;
+  color: var(--text-secondary);
+}
+
+.ambientOptions {
+  display: flex;
+  gap: 6px;
+}
+
+.ambBtn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-subtle);
+  background: var(--surface-2);
+  color: var(--text-secondary);
+  font-family: var(--font-body);
+  font-size: 10px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.ambBtn:hover {
+  background: var(--surface-hover);
+  color: var(--text-primary);
+}
+
+.activeAmbBtn {
+  border-color: var(--accent);
+  color: var(--text-primary);
+  background: var(--accent-soft);
+}
+
+.statBadge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  color: var(--text-secondary);
+  font-family: var(--font-display);
+}

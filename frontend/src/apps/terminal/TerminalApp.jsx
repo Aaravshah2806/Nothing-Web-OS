@@ -58,7 +58,7 @@ export default function TerminalApp() {
           'AVAILABLE SYSTEM COMMANDS:',
           '  glyphfetch / neofetch - Display system hardware & OS telemetry',
           '  matrix                - Toggle dot-matrix falling rain screen',
-          '  open <app>            - Launch app (notes, calc, settings, gallery, music)',
+          '  open <app>            - Launch app (glyph, notes, pomodoro, music, recorder, devtools, files, calc, settings)',
           '  theme <dark|light>    - Change desktop color scheme',
           '  accent <hex>          - Change accent signal color',
           '  wallpaper <name>      - Change wallpaper (dot-grid, glyph-lines, minimal-gradient)',
@@ -97,12 +97,15 @@ export default function TerminalApp() {
 
       case 'open':
         if (!args[0]) {
-          newLogs.push('Usage: open <notes|calc|settings|gallery|music>');
+          newLogs.push('Usage: open <glyph|notes|pomodoro|music|recorder|devtools|files|calc|settings>');
         } else {
           const target = args[0].toLowerCase();
           const app =
             APP_REGISTRY[target] ||
-            (target === 'calc' ? APP_REGISTRY.calculator : null);
+            (target === 'calc' ? APP_REGISTRY.calculator : null) ||
+            (target === 'timer' ? APP_REGISTRY.pomodoro : null) ||
+            (target === 'memo' ? APP_REGISTRY.recorder : null) ||
+            (target === 'tools' ? APP_REGISTRY.devtools : null);
           if (app) {
             openApp(app);
             newLogs.push(`Launched application [${app.name}].`);

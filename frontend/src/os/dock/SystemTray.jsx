@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Sliders, Bell, Wifi, BatteryCharging, Moon, Sun, Monitor, Lock } from 'lucide-react';
+import { Sliders, Bell, Wifi, BatteryCharging, Moon, Sun, Monitor, Lock, Volume2, VolumeX } from 'lucide-react';
 import { useDesktopStore } from '../../store/useDesktopStore';
 import styles from './SystemTray.module.css';
 
@@ -16,6 +16,10 @@ export default function SystemTray() {
     wallpaper,
     setWallpaper,
     setLocked,
+    soundVolume,
+    setSoundVolume,
+    soundMuted,
+    setSoundMuted,
   } = useDesktopStore();
 
   useEffect(() => {
@@ -93,6 +97,31 @@ export default function SystemTray() {
               <Monitor size={16} />
               <span>CYCLE WALLPAPER</span>
             </button>
+          </div>
+
+          {/* Master Sound Volume Row */}
+          <div className={styles.sliderControlRow}>
+            <button
+              onClick={() => setSoundMuted(!soundMuted)}
+              className={styles.muteBtn}
+              title={soundMuted ? 'Unmute Sound' : 'Mute Sound'}
+            >
+              {soundMuted ? <VolumeX size={15} /> : <Volume2 size={15} />}
+            </button>
+            <input
+              type="range"
+              min="0"
+              max="1"
+              step="0.05"
+              value={soundMuted ? 0 : soundVolume}
+              onChange={(e) => {
+                if (soundMuted) setSoundMuted(false);
+                setSoundVolume(parseFloat(e.target.value));
+              }}
+              className={styles.volumeSlider}
+              title={`Master Volume: ${Math.round(soundVolume * 100)}%`}
+            />
+            <span className={styles.volumePct}>{soundMuted ? 'MUTED' : `${Math.round(soundVolume * 100)}%`}</span>
           </div>
 
           <div className={styles.flyoutFooter}>

@@ -184,6 +184,40 @@
   border-color: var(--accent);
 }
 
+.toolbarActions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+  margin-right: 12px;
+}
+
+.toolBtn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  font-family: var(--font-body);
+  font-size: 10px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.toolBtn:hover {
+  background: var(--surface-hover);
+  color: var(--text-primary);
+}
+
+.activeToolBtn {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+
 .tagSelector {
   display: flex;
   gap: 6px;
@@ -213,14 +247,115 @@
   outline: none;
 }
 
+.previewContainer {
+  flex: 1;
+  overflow-y: auto;
+  padding: 4px 0;
+}
+
+.markdownRender {
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--text-primary);
+}
+
+.mdH1 {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0 0 12px 0;
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 6px;
+}
+
+.mdH2 {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 700;
+  margin: 16px 0 8px 0;
+  color: var(--text-primary);
+}
+
+.mdH3 {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  margin: 12px 0 6px 0;
+  color: var(--accent);
+}
+
+.mdQuote {
+  border-left: 2px solid var(--accent);
+  margin: 10px 0;
+  padding-left: 12px;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.mdTodoItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 4px 0;
+}
+
+.mdCheck {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  border: 1px solid var(--border-medium);
+  font-size: 10px;
+  background: var(--surface-2);
+}
+
+.mdCheckDone {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.mdTodoDone {
+  text-decoration: line-through;
+  color: var(--text-muted);
+}
+
+.mdBullet {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin: 4px 0;
+}
+
+.bulletDot {
+  color: var(--accent);
+}
+
+.mdBlankLine {
+  height: 10px;
+}
+
+.mdParagraph {
+  margin: 6px 0;
+}
+
 .editorFooter {
   display: flex;
+  align-items: center;
   justify-content: space-between;
   padding-top: 8px;
   border-top: 1px solid var(--border-subtle);
   font-size: 10px;
   color: var(--text-muted);
   font-family: var(--font-display);
+}
+
+.syncStatus {
+  color: var(--accent);
 }
 
 .noActiveNote {
