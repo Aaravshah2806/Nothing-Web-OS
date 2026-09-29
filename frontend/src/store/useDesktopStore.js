@@ -4,33 +4,37 @@ import { setMasterVolume, setSoundMuted, playNotificationChime } from '../lib/so
 
 const DEFAULT_ACTIVE_WIDGETS = [
   { id: 'w-clock', widgetId: 'clock', x: 36, y: 36 },
-  { id: 'w-glyph', widgetId: 'glyph-status', x: 36, y: 220 },
-  { id: 'w-notes', widgetId: 'notes-widget', x: 36, y: 330 },
-  { id: 'w-calendar', widgetId: 'calendar', x: 380, y: 36 },
-  { id: 'w-weather', widgetId: 'weather', x: 380, y: 270 },
+  { id: 'w-date', widgetId: 'date', x: 260, y: 36 },
+  { id: 'w-weather', widgetId: 'weather', x: 470, y: 36 },
+  { id: 'w-ram', widgetId: 'system-ram', x: 680, y: 36 },
+  { id: 'w-music', widgetId: 'music-widget', x: 36, y: 160 },
+  { id: 'w-glyph', widgetId: 'glyph-status', x: 360, y: 160 },
+  { id: 'w-quotes', widgetId: 'quotes', x: 680, y: 160 },
 ];
 
 const DEFAULT_DESKTOP_ICONS = [
-  { id: 'icon-files', name: 'FILES', iconKey: 'Folder', appId: 'files', x: 28, y: 480 },
-  { id: 'icon-terminal', name: 'TERMINAL', iconKey: 'Terminal', appId: 'terminal', x: 28, y: 580 },
-  { id: 'icon-notes', name: 'NOTES', iconKey: 'FileText', appId: 'notes', x: 120, y: 480 },
-  { id: 'icon-glyph', name: 'GLYPH LAB', iconKey: 'Zap', appId: 'glyph', x: 120, y: 580 },
-  { id: 'icon-pomodoro', name: 'FOCUS TIMER', iconKey: 'Timer', appId: 'pomodoro', x: 212, y: 480 },
-  { id: 'icon-recorder', name: 'RECORDER', iconKey: 'Mic', appId: 'recorder', x: 212, y: 580 },
-  { id: 'icon-devtools', name: 'DEV TOOLS', iconKey: 'Code', appId: 'devtools', x: 304, y: 480 },
-  { id: 'icon-ai', name: 'GLYPH AI', iconKey: 'Sparkles', appId: 'assistant', x: 304, y: 580 },
-  { id: 'icon-trash', name: 'TRASH', iconKey: 'Trash2', appId: 'files', x: 396, y: 580 },
+  { id: 'icon-files', name: 'FILES', iconKey: 'Folder', imageIcon: '/icons/nthing/explorer.png', appId: 'files', x: 28, y: 480 },
+  { id: 'icon-terminal', name: 'TERMINAL', iconKey: 'Terminal', imageIcon: '/icons/nthing/cmd.png', appId: 'terminal', x: 28, y: 580 },
+  { id: 'icon-notes', name: 'NOTES', iconKey: 'FileText', imageIcon: '/icons/nthing/notepad.png', appId: 'notes', x: 120, y: 480 },
+  { id: 'icon-glyph', name: 'GLYPH LAB', iconKey: 'Zap', imageIcon: '/icons/nthing/widgets1.png', appId: 'glyph', x: 120, y: 580 },
+  { id: 'icon-pomodoro', name: 'FOCUS TIMER', iconKey: 'Timer', imageIcon: '/icons/nthing/widgets3.png', appId: 'pomodoro', x: 212, y: 480 },
+  { id: 'icon-recorder', name: 'RECORDER', iconKey: 'Mic', imageIcon: '/icons/nthing/widgets2.png', appId: 'recorder', x: 212, y: 580 },
+  { id: 'icon-devtools', name: 'DEV TOOLS', iconKey: 'Code', imageIcon: '/icons/nthing/vsc.png', appId: 'devtools', x: 304, y: 480 },
+  { id: 'icon-ai', name: 'GLYPH AI', iconKey: 'Sparkles', imageIcon: '/icons/nthing/gemini.png', appId: 'assistant', x: 304, y: 580 },
+  { id: 'icon-music', name: 'MUSIC', iconKey: 'Music', imageIcon: '/icons/nthing/spotify.png', appId: 'music', x: 396, y: 480 },
+  { id: 'icon-trash', name: 'TRASH', iconKey: 'Trash2', imageIcon: '/icons/nthing/bin.png', appId: 'files', x: 396, y: 580 },
 ];
 
 export const useDesktopStore = create(
   persist(
     (set) => ({
-      wallpaper: 'dot-grid',
+      wallpaper: '4', // Default to authentic high-res Nothing OS 2.0 wallpaper from NThing-UI
       theme: 'dark',
       accentColor: '#FF3B30',
       isLocked: false,
       isBooting: false,
       spotlightOpen: false,
+      startMenuOpen: false,
       quickSettingsOpen: false,
       notificationCenterOpen: false,
       desktopContextMenu: { visible: false, x: 0, y: 0 },
@@ -82,6 +86,9 @@ export const useDesktopStore = create(
 
       toggleSpotlight: () => set((state) => ({ spotlightOpen: !state.spotlightOpen })),
       setSpotlightOpen: (open) => set({ spotlightOpen: open }),
+
+      toggleStartMenu: () => set((state) => ({ startMenuOpen: !state.startMenuOpen })),
+      setStartMenuOpen: (open) => set({ startMenuOpen: open }),
 
       toggleQuickSettings: () => set((state) => ({ quickSettingsOpen: !state.quickSettingsOpen })),
       setQuickSettingsOpen: (open) => set({ quickSettingsOpen: open }),

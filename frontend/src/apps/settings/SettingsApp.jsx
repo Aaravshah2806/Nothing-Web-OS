@@ -15,9 +15,19 @@ import { playNotificationChime } from '../../lib/soundEngine';
 import styles from './SettingsApp.module.css';
 
 const WALLPAPERS = [
-  { id: 'dot-grid', name: 'DOT MATRIX GRID', previewClass: 'wallpaper-dot-grid' },
+  { id: '4', name: 'NOTHING OS 2.0 DARK', image: '/wallpapers/4.png' },
+  { id: '1', name: 'FLOWER X-RAY (OS 1)', image: '/wallpapers/1.png' },
+  { id: '2', name: 'RED GLYPH CORE', image: '/wallpapers/2.png' },
+  { id: '3', name: 'GLASS MECHANICAL', image: '/wallpapers/3.png' },
+  { id: '5', name: 'RED SIGNAL MINIMAL', image: '/wallpapers/5.png' },
+  { id: '6', name: 'PHONE (2A) RIBBON', image: '/wallpapers/6.png' },
+  { id: '7', name: 'CIRCUIT WIREFRAME', image: '/wallpapers/7.png' },
+  { id: '8', name: 'MONO DOT MATRIX', image: '/wallpapers/8.png' },
+  { id: '9', name: 'DARK INDUSTRIAL', image: '/wallpapers/9.png' },
+  { id: '10', name: 'PURE DARK GRID', image: '/wallpapers/10.png' },
+  { id: 'dot-grid', name: 'PROCEDURAL DOTS', previewClass: 'wallpaper-dot-grid' },
   { id: 'glyph-lines', name: 'GLYPH CIRCUIT', previewClass: 'wallpaper-glyph-lines' },
-  { id: 'minimal-gradient', name: 'MINIMAL MONOCHROME', previewClass: 'wallpaper-minimal-gradient' },
+  { id: 'minimal-gradient', name: 'MONO GRADIENT', previewClass: 'wallpaper-minimal-gradient' },
 ];
 
 const ACCENT_COLORS = [
@@ -25,14 +35,20 @@ const ACCENT_COLORS = [
   { id: '#FFD400', name: 'Industrial Yellow' },
   { id: '#FFFFFF', name: 'Glyph White' },
   { id: '#007AFF', name: 'Electric Blue' },
+  { id: '#00F0FF', name: 'Cyber Neon' },
+  { id: '#30D158', name: 'Matrix Green' },
 ];
 
 const AVAILABLE_WIDGETS = [
-  { id: 'clock', name: 'Digital Clock Widget' },
+  { id: 'clock', name: 'NThing Dual-Tone Clock' },
+  { id: 'date', name: 'NThing Date 2 Pill (Day Progress)' },
+  { id: 'weather', name: 'NThing Weather 2 Pill' },
+  { id: 'system-ram', name: 'NThing System Monitor (RAM/CPU/SSD)' },
+  { id: 'music-widget', name: 'NThing Music Player Pill' },
+  { id: 'quotes', name: 'NThing Thoughts & Quotes Card' },
   { id: 'glyph-status', name: 'Glyph Status LED Bar' },
   { id: 'notes-widget', name: 'Desktop Sticky Note' },
   { id: 'calendar', name: 'Month Calendar' },
-  { id: 'weather', name: 'Weather Forecast' },
 ];
 
 export default function SettingsApp() {
@@ -107,7 +123,18 @@ export default function SettingsApp() {
                   onClick={() => setWallpaper(wp.id)}
                   className={`${styles.wallpaperCard} ${wallpaper === wp.id ? styles.activeCard : ''}`}
                 >
-                  <div className={`${styles.wallpaperPreview} ${wp.previewClass}`}>
+                  <div
+                    className={`${styles.wallpaperPreview} ${wp.previewClass || ''}`}
+                    style={
+                      wp.image
+                        ? {
+                            backgroundImage: `url(${wp.image})`,
+                            backgroundSize: 'cover',
+                            backgroundPosition: 'center',
+                          }
+                        : undefined
+                    }
+                  >
                     {wallpaper === wp.id && (
                       <div className={styles.checkBadge}>
                         <Check size={14} />

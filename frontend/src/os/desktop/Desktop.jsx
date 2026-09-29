@@ -63,31 +63,43 @@ export default function Desktop() {
     }
   };
 
+  const ALL_WALLPAPERS = ['4', '1', '2', '3', '5', '6', '7', '8', '9', '10', 'dot-grid', 'glyph-lines', 'minimal-gradient'];
+
   const cycleWallpaper = () => {
-    const nextWp =
-      wallpaper === 'dot-grid'
-        ? 'glyph-lines'
-        : wallpaper === 'glyph-lines'
-        ? 'minimal-gradient'
-        : 'dot-grid';
+    const curIdx = ALL_WALLPAPERS.indexOf(wallpaper);
+    const nextWp = ALL_WALLPAPERS[(curIdx + 1) % ALL_WALLPAPERS.length];
     setWallpaper(nextWp);
     addNotification({
       title: 'WALLPAPER APPLIED',
-      message: `Switched desktop canvas to ${nextWp.toUpperCase()}.`,
+      message: `Switched desktop canvas to ${nextWp.toUpperCase()} (NThing UI).`,
     });
     closeContextMenu();
   };
+
+  const isImageWallpaper = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'].includes(wallpaper);
 
   const wallpaperClass =
     wallpaper === 'glyph-lines'
       ? 'wallpaper-glyph-lines'
       : wallpaper === 'minimal-gradient'
       ? 'wallpaper-minimal-gradient'
+      : isImageWallpaper
+      ? ''
       : 'wallpaper-dot-grid';
 
   return (
     <div
       className={`${styles.desktopCanvas} ${wallpaperClass}`}
+      style={
+        isImageWallpaper
+          ? {
+              backgroundImage: `radial-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.65)), url('/wallpapers/${wallpaper}.png')`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center center',
+              backgroundRepeat: 'no-repeat',
+            }
+          : undefined
+      }
       onContextMenu={handleContextMenu}
       onClick={handleDesktopClick}
     >

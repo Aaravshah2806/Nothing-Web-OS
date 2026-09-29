@@ -1,3 +1,5 @@
+@import './fonts.css';
+
 :root {
   /* Color - Dark theme default (Nothing OS Monochrome + Red Accent) */
   --bg-base: #0A0A0A;
@@ -40,10 +42,17 @@
   --radius-xl: 24px;
   --radius-pill: 9999px;
 
-  /* Typography */
-  --font-display: 'DotGothic16', monospace;
-  --font-pixel: 'Silkscreen', monospace;
-  --font-body: 'Space Mono', monospace;
+  /* Typography - Authentic NThing-UI & Nothing OS Font Stacks */
+  --font-ndot: 'NDot55', 'NDot', 'DotGothic16', monospace;
+  --font-nothing: 'NothingBrand', 'Space Mono', sans-serif;
+  --font-nothing-5x7: 'Nothing5x7', 'Silkscreen', monospace;
+  --font-ntype: 'NType', 'NType82', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-ntype-mono: 'NTypeMono', 'Space Mono', monospace;
+  --font-date: 'NothingDate', 'NothingBrand', sans-serif;
+
+  --font-display: var(--font-ndot);
+  --font-pixel: var(--font-nothing-5x7);
+  --font-body: var(--font-ntype-mono);
 
   /* Elevation & Glassmorphism */
   --shadow-window: 0 16px 40px -10px rgba(0, 0, 0, 0.6), 0 0 0 1px var(--border-subtle);

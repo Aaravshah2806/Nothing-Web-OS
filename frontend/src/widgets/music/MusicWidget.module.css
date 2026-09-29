@@ -1,0 +1,174 @@
+.musicPill {
+  width: 295px;
+  height: 84px;
+  background: var(--surface-1);
+  backdrop-filter: var(--backdrop-blur-md);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-pill);
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: var(--shadow-widget);
+  user-select: none;
+  transition: all var(--transition-fast);
+}
+
+.musicPill:hover {
+  border-color: var(--border-medium);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+  transform: translateY(-2px);
+}
+
+/* Vinyl Disc */
+.vinylWrap {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #111111;
+  border: 1px solid var(--border-medium);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.spinning {
+  animation: spinVinyl 4s linear infinite;
+}
+
+@keyframes spinVinyl {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.vinylGrooves {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px dashed rgba(255, 255, 255, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vinylCenter {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--surface-2-solid);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vinylDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 4px var(--accent-glow);
+}
+
+/* Track Info */
+.trackInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.titleRow {
+  display: flex;
+  align-items: center;
+}
+
+.trackTitle {
+  font-family: var(--font-pixel);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.trackArtist {
+  font-family: var(--font-pixel);
+  font-size: 8px;
+  color: var(--text-muted);
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.progressTrack {
+  height: 3px;
+  background: var(--surface-2-solid);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+  margin-top: 4px;
+}
+
+.progressFill {
+  height: 100%;
+  background: var(--accent);
+  transition: width 0.25s linear;
+}
+
+/* Controls */
+.controlsRow {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.ctrlBtn {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  transition: all var(--transition-fast);
+  background: transparent;
+  cursor: pointer;
+}
+
+.ctrlBtn:hover {
+  color: var(--text-primary);
+  background: var(--surface-hover);
+}
+
+.playBtn {
+  background: var(--accent) !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 0 10px var(--accent-glow);
+}
+
+.playBtn:hover {
+  transform: scale(1.1);
+}
+
+/* Equalizer */
+.eqWrap {
+  display: flex;
+  align-items: flex-end;
+  gap: 2.5px;
+  height: 20px;
+  padding-left: 2px;
+}
+
+.eqBar {
+  width: 2px;
+  background: var(--accent);
+  border-radius: 1px;
+  transition: height 0.2s ease;
+  opacity: 0.8;
+}

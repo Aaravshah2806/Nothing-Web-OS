@@ -167,8 +167,24 @@ The backend server runs at `http://localhost:5000`.
      ```
   *Note:* Even if MongoDB is offline, the backend continues running in offline-first mode to serve live system telemetry and weather proxying!
 
+## 🎨 NThing-UI Integration
+
+This project integrates visual assets, fonts, wallpapers, and widget designs from [NThing-UI](https://github.com/Runixe786/NThing-UI) by **Sahil / MaybeSahil / Runixe786**:
+- **Authentic Nothing Typography:** Official `NDot55`, `Nothing5x7`, `NType82`, `NTypeMono`, `NThingE1/E2`, and `NothingDate` fonts.
+- **10 Official High-Res Nothing Wallpapers:** Extracted from NThing-UI (X-Ray, Red Glyph Core, Glass Mechanical, Dark OS 2.0, Ribbon 2a, Circuit Wireframe, and more).
+- **Authentic Dot-Matrix Weather Icons:** 48 authentic Nothing dot-matrix weather icons with dynamic WMO weather code mapping.
+- **NThing Widget Suite:**
+  - *NThing Dual-Tone Clock Widget:* Red hour accent, blinking colon, and dot-matrix date badges.
+  - *NThing Date 2 Pill Widget:* Circular 24-hour day progress pie ring (`MeterDayPie`), Buick date typography, and uppercase month/day.
+  - *NThing Weather 2 Pill Widget:* Frosted pill with circular frame housing dot-matrix weather icons and live temperature.
+  - *NThing Monitor Pill Widget:* Circular radial percentage gauge for RAM, CPU, SSD, and Battery with live telemetry.
+  - *NThing Music Player Pill Widget:* Spinning vinyl disc, track info, progress bar, play/pause controls, and dynamic equalizer bars.
+  - *NThing Quotes & Facts Widget:* Nothing manifesto & design philosophy cards with cycling thoughts.
+- **NThing Start Menu & Power Menu:** Dock Start Button, searchable pinned app launcher with authentic monochrome app icons, system telemetry bar, and quick power controls (Sleep, Lock, Restart, Shut Down).
+
 ---
 
 ## 📜 License & Acknowledgments
 
-This project is an open-source educational concept inspired by the visual design language of **Nothing Technology Limited**. It is an original web operating system that does not reproduce proprietary Nothing OS code, proprietary hardware assets, or trademarked fonts.
+- This project is an open-source educational concept inspired by the visual design language of **Nothing Technology Limited**.
+- Special thanks to [Runixe786/NThing-UI](https://github.com/Runixe786/NThing-UI) for providing the authentic Rainmeter Nothing OS assets, wallpapers, fonts, and widget layouts.

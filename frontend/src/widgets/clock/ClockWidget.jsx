@@ -22,16 +22,16 @@ export default function ClockWidget() {
   const year = time.getFullYear();
 
   return (
-    <div className={styles.widget}>
+    <div className={styles.widget} title="Nothing OS Clock (NThing-UI)">
       <div className={styles.timeRow}>
-        <span className={styles.digit}>{hours}</span>
+        <span className={styles.hourDigit}>{hours}</span>
         <span className={styles.colon}>:</span>
-        <span className={styles.digit}>{minutes}</span>
+        <span className={styles.minDigit}>{minutes}</span>
         <span className={styles.sec}>{seconds}</span>
       </div>
       <div className={styles.dateRow}>
         <span className={styles.accentBadge}>{dayName}</span>
-        <span>{dateNum} {monthName} {year}</span>
+        <span className={styles.dateText}>{dateNum} {monthName} {year}</span>
       </div>
     </div>
   );

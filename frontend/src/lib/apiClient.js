@@ -46,6 +46,7 @@ export const api = {
   // System & Health
   health: () => request('/health'),
   telemetry: () => request('/system/telemetry'),
+  systemTelemetry: () => request('/system/telemetry'),
   weather: (city = 'Delhi') => request(`/weather?city=${encodeURIComponent(city)}`),
 
   // Authentication

@@ -9,6 +9,8 @@ import styles from './Dock.module.css';
 export default function Dock() {
   const { windows, openApp, minimizeWindow, focusWindow, focusedWindowId } = useWindowStore();
   const toggleSpotlight = useDesktopStore((state) => state.toggleSpotlight);
+  const toggleStartMenu = useDesktopStore((state) => state.toggleStartMenu);
+  const startMenuOpen = useDesktopStore((state) => state.startMenuOpen);
   const apps = getAppList();
 
   const handleAppClick = (app) => {
@@ -29,6 +31,21 @@ export default function Dock() {
   return (
     <footer className={styles.dockContainer}>
       <nav className={styles.dockPill} aria-label="Glyph OS App Dock">
+        {/* NThing Start Menu Trigger */}
+        <button
+          onClick={toggleStartMenu}
+          className={`${styles.dockItem} ${styles.startItem} ${startMenuOpen ? styles.startItemActive : ''}`}
+          title="Start Menu (NThing UI)"
+          aria-label="Start Menu"
+        >
+          <div className={styles.iconBox}>
+            <div className={styles.nothingGlyphLogo}>
+              <span className={styles.glyphDotCenter} />
+              <span className={styles.glyphRing} />
+            </div>
+          </div>
+        </button>
+
         {/* Spotlight Trigger */}
         <button
           onClick={toggleSpotlight}
@@ -61,7 +78,16 @@ export default function Dock() {
                 aria-label={`Open ${app.name}`}
               >
                 <div className={styles.iconBox}>
-                  <AppIcon size={20} strokeWidth={1.8} />
+                  {app.imageIcon ? (
+                    <img
+                      src={app.imageIcon}
+                      alt={app.name}
+                      className={styles.dockIconImg}
+                      draggable={false}
+                    />
+                  ) : (
+                    <AppIcon size={20} strokeWidth={1.8} />
+                  )}
                 </div>
                 {/* Active Indicator Dot */}
                 <div className={`${styles.activeDot} ${isOpen ? styles.activeDotVisible : ''}`} />

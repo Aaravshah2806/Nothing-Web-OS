@@ -1,75 +1,91 @@
-.widget {
+.weatherPill {
+  width: 195px;
+  height: 84px;
   background: var(--surface-1);
   backdrop-filter: var(--backdrop-blur-md);
   border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-md);
-  padding: 16px 20px;
+  border-radius: var(--radius-pill);
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
   box-shadow: var(--shadow-widget);
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
   user-select: none;
-  width: 280px;
+  transition: all var(--transition-fast);
 }
 
-.topRow {
+.weatherPill:hover {
+  border-color: var(--border-medium);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+  transform: translateY(-2px);
+}
+
+.iconCircle {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--surface-2-solid);
+  border: 1px solid var(--border-subtle);
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
 }
 
-.locationBlock {
+.weatherIconImg {
+  width: 38px;
+  height: 38px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.4));
+}
+
+.textColumn {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: 2px;
-}
-
-.city {
-  font-family: var(--font-display);
-  font-size: 13px;
-  letter-spacing: 1.5px;
-  color: var(--text-primary);
-}
-
-.condition {
-  font-size: 10px;
-  color: var(--text-secondary);
-}
-
-.weatherIcon {
-  color: var(--text-primary);
+  min-width: 0;
+  overflow: hidden;
 }
 
 .tempRow {
   display: flex;
   align-items: baseline;
-  gap: 4px;
+  line-height: 1;
 }
 
-.tempDigit {
-  font-family: var(--font-display);
-  font-size: 42px;
-  line-height: 1;
+.tempValue {
+  font-family: var(--font-pixel);
+  font-size: 18px;
+  font-weight: 700;
   color: var(--text-primary);
 }
 
 .tempUnit {
-  font-family: var(--font-display);
-  font-size: 18px;
+  font-family: var(--font-pixel);
+  font-size: 11px;
+  color: var(--text-secondary);
+  margin-left: 2px;
+}
+
+.conditionText {
+  font-family: var(--font-pixel);
+  font-size: 9px;
+  font-weight: 800;
   color: var(--accent);
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
-.metricsRow {
-  display: flex;
-  gap: 16px;
-  font-size: 10px;
-  color: var(--text-muted);
-  border-top: 1px solid var(--border-subtle);
-  padding-top: 8px;
-}
-
-.metric {
+.subRow {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
+  font-family: var(--font-pixel);
+  font-size: 8px;
+  color: var(--text-muted);
+  letter-spacing: 0.5px;
 }

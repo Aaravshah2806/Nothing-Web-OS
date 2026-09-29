@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { CloudSun, Wind, Droplets, CloudRain, Sun, CloudFog } from 'lucide-react';
 import { api } from '../../lib/apiClient';
 import styles from './WeatherWidget.module.css';
 
@@ -9,46 +8,95 @@ const WMO_CONDITIONS = {
   2: 'PARTLY CLOUDY',
   3: 'OVERCAST',
   45: 'FOGGY',
-  48: 'DEPOSITING RIME FOG',
+  48: 'RIME FOG',
   51: 'LIGHT DRIZZLE',
-  61: 'RAIN SHOWERS',
+  53: 'DRIZZLE',
+  55: 'HEAVY DRIZZLE',
+  61: 'LIGHT RAIN',
   63: 'MODERATE RAIN',
   65: 'HEAVY RAIN',
   71: 'LIGHT SNOW',
+  73: 'MODERATE SNOW',
+  75: 'HEAVY SNOW',
+  80: 'RAIN SHOWERS',
+  81: 'HEAVY SHOWERS',
+  82: 'VIOLENT RAIN',
   95: 'THUNDERSTORM',
+  96: 'HAIL STORM',
+  99: 'SEVERE THUNDER',
 };
+
+// Map WMO weather code to authentic NThing-UI dot-matrix weather icon number
+function getNothingIconId(wmoCode, isDay = true) {
+  switch (wmoCode) {
+    case 0:
+      return isDay ? 32 : 31;
+    case 1:
+    case 2:
+      return isDay ? 30 : 29;
+    case 3:
+      return 26;
+    case 45:
+    case 48:
+      return 20;
+    case 51:
+    case 53:
+    case 55:
+      return 9;
+    case 61:
+    case 63:
+    case 65:
+      return 12;
+    case 71:
+    case 73:
+    case 75:
+      return 16;
+    case 80:
+    case 81:
+    case 82:
+      return 40;
+    case 85:
+    case 86:
+      return 42;
+    case 95:
+    case 96:
+    case 99:
+      return 4;
+    default:
+      return 32;
+  }
+}
 
 export default function WeatherWidget() {
   const [weather, setWeather] = useState({
-    temp: 22,
+    temp: 24,
     condition: 'CLEAR SKY',
-    wind: '7 KM/H',
-    location: 'DELHI, IN',
-    code: 0,
+    wind: '8 KM/H',
+    location: 'DELHI',
+    iconId: 32,
   });
 
   useEffect(() => {
     let isMounted = true;
 
     const loadWeather = async () => {
-      // 1. Try backend cached weather proxy first
+      // 1. Backend cached proxy
       try {
         const res = await api.weather('DELHI');
         if (isMounted && res && res.data) {
+          const isDay = new Date().getHours() >= 6 && new Date().getHours() < 19;
           setWeather({
             temp: res.data.temp,
             condition: res.data.condition.toUpperCase(),
             wind: `${res.data.windSpeed} KM/H`,
-            location: 'DELHI, IN',
-            code: 0,
+            location: 'DELHI',
+            iconId: getNothingIconId(res.data.weatherCode || 0, isDay),
           });
           return;
         }
-      } catch {
-        // Continue to direct fetch fallback
-      }
+      } catch {}
 
-      // 2. Direct browser fallback
+      // 2. Direct browser Open-Meteo fallback
       try {
         const res = await fetch(
           'https://api.open-meteo.com/v1/forecast?latitude=28.6139&longitude=77.2090&current_weather=true'
@@ -56,12 +104,14 @@ export default function WeatherWidget() {
         const data = await res.json();
         if (isMounted && data && data.current_weather) {
           const cur = data.current_weather;
+          const code = cur.weathercode ?? 0;
+          const isDay = cur.is_day !== undefined ? Boolean(cur.is_day) : true;
           setWeather({
             temp: Math.round(cur.temperature),
-            condition: WMO_CONDITIONS[cur.weathercode] || 'PARTLY CLOUDY',
+            condition: WMO_CONDITIONS[code] || 'PARTLY CLOUDY',
             wind: `${Math.round(cur.windspeed)} KM/H`,
-            location: 'DELHI, IN',
-            code: cur.weathercode,
+            location: 'DELHI',
+            iconId: getNothingIconId(code, isDay),
           });
         }
       } catch (e) {
@@ -70,7 +120,7 @@ export default function WeatherWidget() {
     };
 
     loadWeather();
-    const interval = setInterval(loadWeather, 15 * 60 * 1000); // 15 mins
+    const interval = setInterval(loadWeather, 15 * 60 * 1000);
 
     return () => {
       isMounted = false;
@@ -78,38 +128,32 @@ export default function WeatherWidget() {
     };
   }, []);
 
-  const WeatherIcon =
-    weather.code === 0
-      ? Sun
-      : [61, 63, 65, 51].includes(weather.code)
-      ? CloudRain
-      : [45, 48].includes(weather.code)
-      ? CloudFog
-      : CloudSun;
-
   return (
-    <div className={styles.widget}>
-      <div className={styles.topRow}>
-        <div className={styles.locationBlock}>
-          <span className={styles.city}>{weather.location}</span>
-          <span className={styles.condition}>{weather.condition}</span>
+    <div className={styles.weatherPill} title={`Nothing OS Weather — ${weather.condition} (${weather.location})`}>
+      {/* Left Circular Frame with authentic NThing dot-matrix weather icon */}
+      <div className={styles.iconCircle}>
+        <img
+          src={`/weather-icons/${weather.iconId}.png`}
+          alt={weather.condition}
+          className={styles.weatherIconImg}
+          draggable={false}
+          onError={(e) => {
+            e.currentTarget.src = '/weather-icons/32.png';
+          }}
+        />
+      </div>
+
+      {/* Right Column: Temperature, Condition & City */}
+      <div className={styles.textColumn}>
+        <div className={styles.tempRow}>
+          <span className={styles.tempValue}>{weather.temp}</span>
+          <span className={styles.tempUnit}>°C</span>
         </div>
-        <WeatherIcon size={28} className={styles.weatherIcon} />
-      </div>
-
-      <div className={styles.tempRow}>
-        <span className={styles.tempDigit}>{weather.temp}</span>
-        <span className={styles.tempUnit}>°C</span>
-      </div>
-
-      <div className={styles.metricsRow}>
-        <div className={styles.metric}>
-          <Wind size={12} />
+        <span className={styles.conditionText}>{weather.condition}</span>
+        <div className={styles.subRow}>
+          <span>{weather.location}</span>
+          <span>•</span>
           <span>{weather.wind}</span>
-        </div>
-        <div className={styles.metric}>
-          <Droplets size={12} />
-          <span>LIVE • 1013 HPA</span>
         </div>
       </div>
     </div>

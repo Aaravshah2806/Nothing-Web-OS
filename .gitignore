@@ -1,1 +1,84 @@
+# ==============================================================================
+# Nothing Web OS — Root .gitignore
+# ==============================================================================
+
+# Dependencies
+node_modules/
+*/node_modules/
+.pnpm-store/
+
+# Production Builds & Bundles
+dist/
+*/dist/
+dist-ssr/
+*/dist-ssr/
+build/
+out/
+*.local
+
+# Environment & Sensitive Credentials
+.env
+.env.*
+!.env.example
+*.env.local
+*.env.*.local
+backend/.env
+frontend/.env
+
+# Logs & Debugging
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# OS-Generated & Image Caches (Windows, macOS, Linux)
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+desktop.ini
+
+# IDE & Editor Directories
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.sublime-workspace
+*.sublime-project
+
+# Temporary & Scratch Files
+*.tmp
+*.temp
+*.bak
+*.swp
+scratch/
+tmp/
+temp/
+.cache/
+
+# User Voice Memo Recordings / Binary Uploads (Stored via Supabase Storage)
+uploads/
+backend/uploads/
+*.wav
+*.webm
+*.mp3
+
+# Testing & Coverage
+coverage/
+*.lcov
+.nyc_output/
+
+# Notes & Working Drafts
 frontend/new.md

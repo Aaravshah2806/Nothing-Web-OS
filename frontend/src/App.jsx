@@ -6,6 +6,7 @@ import SpotlightSearch from './os/spotlight/SpotlightSearch';
 import NotificationCenter from './os/notifications/NotificationCenter';
 import LockScreen from './os/boot/LockScreen';
 import BootScreen from './os/boot/BootScreen';
+import StartMenu from './os/start/StartMenu';
 import { MonitorX } from 'lucide-react';
 
 export default function App() {
@@ -45,6 +46,9 @@ export default function App() {
 
       {/* OS Dock & System Tray */}
       <Dock />
+
+      {/* Nothing OS / NThing-UI Start Menu Drawer */}
+      <StartMenu />
 
       {/* Spotlight Search Overlay */}
       <SpotlightSearch />

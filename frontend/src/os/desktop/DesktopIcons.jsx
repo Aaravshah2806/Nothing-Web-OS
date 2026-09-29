@@ -107,7 +107,16 @@ function DraggableDesktopIcon({ item, isSelected, onSelect, onLaunch }) {
       title={`Double-click to open ${item.name}`}
     >
       <div className={styles.iconBox}>
-        <IconComponent size={28} strokeWidth={1.5} />
+        {item.imageIcon ? (
+          <img
+            src={item.imageIcon}
+            alt={item.name}
+            className={styles.iconImg}
+            draggable={false}
+          />
+        ) : (
+          <IconComponent size={28} strokeWidth={1.5} />
+        )}
       </div>
       <span className={styles.iconLabel}>{item.name}</span>
     </div>

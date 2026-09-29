@@ -108,3 +108,50 @@
   height: 28px;
   background: var(--border-subtle);
 }
+
+.dockIconImg {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4));
+}
+
+.startItem .iconBox {
+  background: var(--surface-1-solid);
+  border-color: var(--border-medium);
+}
+
+.startItemActive .iconBox {
+  border-color: var(--accent);
+  box-shadow: 0 0 12px var(--accent-glow);
+}
+
+.nothingGlyphLogo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  position: relative;
+}
+
+.glyphDotCenter {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent-glow);
+}
+
+.glyphRing {
+  position: absolute;
+  inset: 1px;
+  border: 1.5px dashed var(--text-secondary);
+  border-radius: 50%;
+  animation: slowSpin 16s linear infinite;
+}
+
+@keyframes slowSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
