@@ -10,6 +10,7 @@ import {
   Timer,
   Mic,
   Code,
+  Sparkles,
 } from 'lucide-react';
 import NotesApp from './notes/NotesApp';
 import CalculatorApp from './calculator/CalculatorApp';
@@ -22,8 +23,18 @@ import GlyphComposerApp from './glyph/GlyphComposerApp';
 import PomodoroApp from './pomodoro/PomodoroApp';
 import RecorderApp from './recorder/RecorderApp';
 import DevToolsApp from './devtools/DevToolsApp';
+import AIAssistantApp from './ai/AIAssistantApp';
 
 export const APP_REGISTRY = {
+  assistant: {
+    id: 'assistant',
+    name: 'GLYPH AI',
+    icon: Sparkles,
+    component: AIAssistantApp,
+    defaultWidth: 540,
+    defaultHeight: 580,
+    pinned: true,
+  },
   glyph: {
     id: 'glyph',
     name: 'GLYPH LAB',

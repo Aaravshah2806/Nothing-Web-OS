@@ -12,6 +12,7 @@ import {
   Code,
   Music,
   Sliders,
+  Sparkles,
 } from 'lucide-react';
 import { useWindowStore } from '../../store/useWindowStore';
 import { useDesktopStore } from '../../store/useDesktopStore';
@@ -31,6 +32,7 @@ const ICON_MAP = {
   Code,
   Music,
   Sliders,
+  Sparkles,
 };
 
 function DraggableDesktopIcon({ item, isSelected, onSelect, onLaunch }) {

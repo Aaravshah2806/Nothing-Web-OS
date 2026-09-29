@@ -4,15 +4,7 @@ import { APP_REGISTRY } from '../../apps/appRegistry';
 import styles from './AltTabSwitcher.module.css';
 
 export default function AltTabSwitcher() {
-  const {
-    windows,
-    altTabOpen,
-    altTabSelectedIdx,
-    openAltTab,
-    cycleAltTab,
-    commitAltTab,
-    cancelAltTab,
-  } = useWindowStore();
+  const { windows, altTabOpen, altTabSelectedIdx } = useWindowStore();
 
   useEffect(() => {
     let altPressed = false;

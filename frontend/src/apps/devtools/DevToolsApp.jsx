@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import {
-  Code,
   FileJson,
   CaseSensitive,
   Copy,
@@ -90,7 +89,7 @@ export default function DevToolsApp() {
       const hashArray = Array.from(new Uint8Array(hashBuffer));
       const hashHex = hashArray.map((b) => b.toString(16).padStart(2, '0')).join('');
       setHashOutput(hashHex);
-    } catch (_e) {
+    } catch {
       setHashOutput('Hash error');
     }
   };

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Image as ImageIcon, ZoomIn, X, Upload } from 'lucide-react';
+import { Image as ImageIcon, X, Upload } from 'lucide-react';
 import styles from './GalleryApp.module.css';
 
 const DEFAULT_GALLERY = [

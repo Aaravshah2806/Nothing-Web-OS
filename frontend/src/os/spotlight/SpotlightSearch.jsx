@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Search, ArrowRight, CornerDownLeft } from 'lucide-react';
+import { Search, CornerDownLeft } from 'lucide-react';
 import { useDesktopStore } from '../../store/useDesktopStore';
 import { useWindowStore } from '../../store/useWindowStore';
 import { getAppList } from '../../apps/appRegistry';
@@ -21,9 +21,7 @@ export default function SpotlightSearch() {
 
   useEffect(() => {
     if (spotlightOpen) {
-      setQuery('');
-      setSelectedIndex(0);
-      setTimeout(() => inputRef.current?.focus(), 50);
+      inputRef.current?.focus();
     }
   }, [spotlightOpen]);
 

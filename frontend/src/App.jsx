@@ -9,8 +9,8 @@ import BootScreen from './os/boot/BootScreen';
 import { MonitorX } from 'lucide-react';
 
 export default function App() {
-  const { theme, accentColor, isBooting, setBooting } = useDesktopStore();
-  const [booting, setBootingState] = useState(false); // set to true if testing boot screen
+  const { theme, accentColor } = useDesktopStore();
+  const [booting] = useState(false); // set to true if testing boot screen
 
   // Sync theme attribute and dynamic accent color on root element
   useEffect(() => {

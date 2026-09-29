@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Activity, BatteryCharging, Cpu, Zap } from 'lucide-react';
+import { Activity, BatteryCharging, Cpu, Zap, Database } from 'lucide-react';
+import { api } from '../../lib/apiClient';
 import styles from './GlyphWidget.module.css';
 
 export default function GlyphWidget() {
@@ -7,6 +8,8 @@ export default function GlyphWidget() {
   const [batteryLevel, setBatteryLevel] = useState(96);
   const [isCharging, setIsCharging] = useState(true);
   const [memoryUsage, setMemoryUsage] = useState('3.8 / 8 GB');
+  const [cpuUsage, setCpuUsage] = useState('18%');
+  const [dbStatus, setDbStatus] = useState('LOCAL');
 
   useEffect(() => {
     // Pulse animation timer
@@ -27,14 +30,35 @@ export default function GlyphWidget() {
       }).catch(() => {});
     }
 
-    // Real memory telemetry if Chromium Performance API is accessible
-    if (typeof performance !== 'undefined' && performance.memory) {
-      const usedMB = Math.round(performance.memory.usedJSHeapSize / (1024 * 1024));
-      const totalMB = Math.round(performance.memory.jsHeapSizeLimit / (1024 * 1024));
-      setMemoryUsage(`${(usedMB / 1024).toFixed(1)} / ${(totalMB / 1024).toFixed(1)} GB`);
-    }
+    // Live backend telemetry with offline fallback
+    let isMounted = true;
+    const fetchTelemetry = async () => {
+      try {
+        const res = await api.telemetry();
+        if (isMounted && res && res.telemetry) {
+          const t = res.telemetry;
+          setMemoryUsage(`${t.memory.usedGB} / ${t.memory.totalGB} GB`);
+          setCpuUsage(`${t.memory.percentUsed}%`);
+          setDbStatus(t.database.status === 'connected' ? 'MONGO • ON' : 'OFFLINE');
+        }
+      } catch {
+        // Fallback to browser performance API if backend offline
+        if (typeof performance !== 'undefined' && performance.memory) {
+          const usedMB = Math.round(performance.memory.usedJSHeapSize / (1024 * 1024));
+          const totalMB = Math.round(performance.memory.jsHeapSizeLimit / (1024 * 1024));
+          setMemoryUsage(`${(usedMB / 1024).toFixed(1)} / ${(totalMB / 1024).toFixed(1)} GB`);
+        }
+      }
+    };
 
-    return () => clearInterval(interval);
+    fetchTelemetry();
+    const telemetryInterval = setInterval(fetchTelemetry, 3500);
+
+    return () => {
+      isMounted = false;
+      clearInterval(interval);
+      clearInterval(telemetryInterval);
+    };
   }, []);
 
   return (
@@ -64,7 +88,7 @@ export default function GlyphWidget() {
       <div className={styles.metrics}>
         <div className={styles.metricItem}>
           <Cpu size={12} />
-          <span>CPU: 18%</span>
+          <span>CPU: {cpuUsage}</span>
         </div>
         <div className={styles.metricItem}>
           <Activity size={12} />
@@ -73,6 +97,10 @@ export default function GlyphWidget() {
         <div className={styles.metricItem}>
           <BatteryCharging size={12} className={isCharging ? styles.accentIcon : ''} />
           <span>BAT: {batteryLevel}% {isCharging ? '⚡' : ''}</span>
+        </div>
+        <div className={styles.metricItem}>
+          <Database size={12} className={dbStatus.includes('ON') ? styles.accentIcon : ''} />
+          <span>{dbStatus}</span>
         </div>
       </div>
     </div>

@@ -18,7 +18,8 @@ const DEFAULT_DESKTOP_ICONS = [
   { id: 'icon-pomodoro', name: 'FOCUS TIMER', iconKey: 'Timer', appId: 'pomodoro', x: 212, y: 480 },
   { id: 'icon-recorder', name: 'RECORDER', iconKey: 'Mic', appId: 'recorder', x: 212, y: 580 },
   { id: 'icon-devtools', name: 'DEV TOOLS', iconKey: 'Code', appId: 'devtools', x: 304, y: 480 },
-  { id: 'icon-trash', name: 'TRASH', iconKey: 'Trash2', appId: 'files', x: 304, y: 580 },
+  { id: 'icon-ai', name: 'GLYPH AI', iconKey: 'Sparkles', appId: 'assistant', x: 304, y: 580 },
+  { id: 'icon-trash', name: 'TRASH', iconKey: 'Trash2', appId: 'files', x: 396, y: 580 },
 ];
 
 export const useDesktopStore = create(

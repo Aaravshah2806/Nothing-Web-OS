@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Lock, ArrowUp, BatteryCharging, Wifi } from 'lucide-react';
+import { ArrowUp, BatteryCharging, Wifi } from 'lucide-react';
 import { useDesktopStore } from '../../store/useDesktopStore';
 import styles from './LockScreen.module.css';
 

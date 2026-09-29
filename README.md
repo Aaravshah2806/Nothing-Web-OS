@@ -107,46 +107,65 @@ Nothing-Web-OS/
     │   │   ├── spotlight/    # Search overlay
     │   │   ├── boot/         # Lock screen & boot sequence
     │   │   └── notifications/# Toast notification drawer
-    │   ├── widgets/      # Desktop widgets (Clock, Glyph, Weather, Notes, Calendar)
-    │   ├── store/        # Zustand stores with localStorage persistence
-    │   ├── lib/          # Procedural Web Audio synthesizer engine
-    │   └── styles/       # Design tokens (tokens.css, global.css)
+```
+Nothing-Web-OS/
+├── backend/
+│   ├── src/
+│   │   ├── config/       # MongoDB connection & reconnect handler
+│   │   ├── models/       # Mongoose Schemas (User, DesktopState, Note, VoiceMemo)
+│   │   ├── controllers/  # Auth, Desktop state, Notes, Recorder, Telemetry, Weather
+│   │   ├── routes/       # Express REST endpoints
+│   │   ├── middleware/   # JWT verification & DB status gatekeeper
+│   │   └── server.js     # Express server entry point
+│   ├── .env.example
+│   └── package.json
+└── frontend/
+    └── src/
+        ├── apps/         # Applications (Glyph Lab, Focus Timer, Recorder, Dev Tools, Notes, etc.)
+        ├── os/           # Window manager, dock, taskbar, spotlight, lock screen
+        ├── widgets/      # Desktop widgets (Clock, Glyph Status, Weather, Notes, Calendar)
+        ├── store/        # Zustand stores with localStorage persistence
+        ├── lib/          # Web Audio procedural sound engine & API client
+        └── styles/       # Design tokens (tokens.css, global.css)
 ```
 
 - **Frontend:** React 19, Vite 8, Zustand 5 (with `persist` middleware).
+- **Backend:** Node.js, Express.js, Mongoose.
+- **Database:** MongoDB (Local or MongoDB Atlas Free Tier).
 - **Styling:** Modular Vanilla CSS & CSS Custom Properties (zero CSS framework bloat).
 - **Typography:** `DotGothic16`, `Silkscreen`, `Space Mono`.
 - **Sound:** Web Audio API procedural sound synthesis (tactile clicks, timer alarm, notification pings, ambient focus noise).
-- **Backend / Cloud Sync:** Express API & Supabase integration ready (documented in `docs/TRD.md`).
 
 ---
 
 ## 🏁 Getting Started
 
-### Prerequisites
-- Node.js 18+
-- npm or pnpm
-
-### Running Locally
+### 1. Start the Frontend
 ```bash
-# Navigate to the frontend directory
 cd frontend
-
-# Install dependencies
 npm install
-
-# Start the Vite development server
 npm run dev
 ```
+Open `http://localhost:5173`. Ensure your viewport is 1280px wide or greater.
 
-Open your browser at `http://localhost:5173`. Ensure your browser window is 1280px wide or greater.
-
-### Building for Production
+### 2. Start the Backend & MongoDB
 ```bash
-cd frontend
-npm run build
-npm run preview
+cd backend
+npm install
+npm run dev
 ```
+The backend server runs at `http://localhost:5000`.
+
+#### MongoDB Setup (Choose Local or Cloud Atlas)
+- **Local MongoDB (Default):**
+  Ensure MongoDB service is running (`mongodb://localhost:27017/nothing_web_os`).
+- **Free MongoDB Atlas Cloud:**
+  1. Create a free M0 cluster at [MongoDB Atlas](https://www.mongodb.com/cloud/atlas).
+  2. In `backend/.env`, set your connection string:
+     ```env
+     MONGODB_URI=mongodb+srv://<username>:<password>@cluster0.abcde.mongodb.net/nothing_web_os?retryWrites=true&w=majority
+     ```
+  *Note:* Even if MongoDB is offline, the backend continues running in offline-first mode to serve live system telemetry and weather proxying!
 
 ---
 

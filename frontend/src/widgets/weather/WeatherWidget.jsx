@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { CloudSun, Wind, Droplets, CloudRain, Sun, CloudFog } from 'lucide-react';
+import { api } from '../../lib/apiClient';
 import styles from './WeatherWidget.module.css';
 
 const WMO_CONDITIONS = {
@@ -19,46 +20,62 @@ const WMO_CONDITIONS = {
 
 export default function WeatherWidget() {
   const [weather, setWeather] = useState({
-    temp: 21,
-    condition: 'SCATTERED CLOUDS',
-    wind: '14 KM/H',
-    location: 'LONDON, UK',
-    code: 2,
+    temp: 22,
+    condition: 'CLEAR SKY',
+    wind: '7 KM/H',
+    location: 'DELHI, IN',
+    code: 0,
   });
 
   useEffect(() => {
-    const fetchWeather = async (lat = 51.5074, lon = -0.1278, locName = 'LONDON, UK') => {
+    let isMounted = true;
+
+    const loadWeather = async () => {
+      // 1. Try backend cached weather proxy first
+      try {
+        const res = await api.weather('DELHI');
+        if (isMounted && res && res.data) {
+          setWeather({
+            temp: res.data.temp,
+            condition: res.data.condition.toUpperCase(),
+            wind: `${res.data.windSpeed} KM/H`,
+            location: 'DELHI, IN',
+            code: 0,
+          });
+          return;
+        }
+      } catch {
+        // Continue to direct fetch fallback
+      }
+
+      // 2. Direct browser fallback
       try {
         const res = await fetch(
-          `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`
+          'https://api.open-meteo.com/v1/forecast?latitude=28.6139&longitude=77.2090&current_weather=true'
         );
         const data = await res.json();
-        if (data && data.current_weather) {
+        if (isMounted && data && data.current_weather) {
           const cur = data.current_weather;
           setWeather({
             temp: Math.round(cur.temperature),
             condition: WMO_CONDITIONS[cur.weathercode] || 'PARTLY CLOUDY',
             wind: `${Math.round(cur.windspeed)} KM/H`,
-            location: locName,
+            location: 'DELHI, IN',
             code: cur.weathercode,
           });
         }
       } catch (e) {
-        console.debug('Weather fetch fallback', e);
+        console.debug('Weather fetch fallback error', e);
       }
     };
 
-    if (typeof navigator !== 'undefined' && 'geolocation' in navigator) {
-      navigator.geolocation.getCurrentPosition(
-        (pos) => {
-          fetchWeather(pos.coords.latitude, pos.coords.longitude, 'LOCAL STATION');
-        },
-        () => fetchWeather(51.5074, -0.1278, 'LONDON, UK'),
-        { timeout: 4000 }
-      );
-    } else {
-      fetchWeather(51.5074, -0.1278, 'LONDON, UK');
-    }
+    loadWeather();
+    const interval = setInterval(loadWeather, 15 * 60 * 1000); // 15 mins
+
+    return () => {
+      isMounted = false;
+      clearInterval(interval);
+    };
   }, []);
 
   const WeatherIcon =

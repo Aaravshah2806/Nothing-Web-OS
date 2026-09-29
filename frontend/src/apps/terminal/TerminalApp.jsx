@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useDesktopStore } from '../../store/useDesktopStore';
 import { useWindowStore } from '../../store/useWindowStore';
 import { APP_REGISTRY } from '../appRegistry';
+import { api } from '../../lib/apiClient';
 import styles from './TerminalApp.module.css';
 
 const ASCII_LOGO = `
@@ -56,9 +57,10 @@ export default function TerminalApp() {
       case 'help':
         newLogs.push(
           'AVAILABLE SYSTEM COMMANDS:',
+          '  ai <prompt>           - Query native Glyph AI intelligence layer',
           '  glyphfetch / neofetch - Display system hardware & OS telemetry',
           '  matrix                - Toggle dot-matrix falling rain screen',
-          '  open <app>            - Launch app (glyph, notes, pomodoro, music, recorder, devtools, files, calc, settings)',
+          '  open <app>            - Launch app (ai, glyph, notes, pomodoro, music, recorder, devtools, files, calc, settings)',
           '  theme <dark|light>    - Change desktop color scheme',
           '  accent <hex>          - Change accent signal color',
           '  wallpaper <name>      - Change wallpaper (dot-grid, glyph-lines, minimal-gradient)',
@@ -69,6 +71,32 @@ export default function TerminalApp() {
           '  whoami                - Print current user session',
           '  clear                 - Clear console window'
         );
+        break;
+
+      case 'ai':
+        if (!args.length) {
+          newLogs.push('Usage: ai <question or prompt to Glyph AI>');
+        } else {
+          const userQuery = args.join(' ');
+          newLogs.push(`( · ) Querying Glyph AI: "${userQuery}"...`);
+          setLogs([...newLogs]);
+          api.ai
+            .chat(userQuery)
+            .then((res) => {
+              setLogs((prev) => [
+                ...prev,
+                `[GLYPH AI / ${res.model || 'GEMINI'}]:`,
+                res.reply || '( · ) No response generated.',
+              ]);
+            })
+            .catch(() => {
+              setLogs((prev) => [
+                ...prev,
+                `[GLYPH AI OFFLINE]: Backend server offline. Start backend to query live Gemini AI.`,
+              ]);
+            });
+          return;
+        }
         break;
 
       case 'glyphfetch':
