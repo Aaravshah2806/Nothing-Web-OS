@@ -10,8 +10,20 @@ import StartMenu from './os/start/StartMenu';
 import { MonitorX } from 'lucide-react';
 
 export default function App() {
-  const { theme, accentColor } = useDesktopStore();
-  const [booting] = useState(false); // set to true if testing boot screen
+  const { theme, accentColor, isBooting, setBooting } = useDesktopStore();
+  const [booting, setBootingState] = useState(true); // Always play authentic NothingOS boot intro on launch!
+
+  // Listen to store reboot requests
+  useEffect(() => {
+    if (isBooting) {
+      setBootingState(true);
+    }
+  }, [isBooting]);
+
+  const handleBootComplete = () => {
+    setBootingState(false);
+    setBooting(false);
+  };
 
   // Sync theme attribute and dynamic accent color on root element
   useEffect(() => {
@@ -35,8 +47,8 @@ export default function App() {
         </p>
       </div>
 
-      {/* Boot Animation */}
-      {booting && <BootScreen onBootComplete={() => setBootingState(false)} />}
+      {/* NothingOS Dot-Matrix Boot Entry Animation */}
+      {booting && <BootScreen onBootComplete={handleBootComplete} />}
 
       {/* Lock Screen */}
       <LockScreen />

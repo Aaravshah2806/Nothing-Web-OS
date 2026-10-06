@@ -3,7 +3,7 @@ import { useDesktopStore } from '../../store/useDesktopStore';
 import { WIDGET_REGISTRY } from '../../widgets/widgetRegistry';
 import styles from './WidgetGrid.module.css';
 
-function DraggableWidgetWrapper({ widgetData }) {
+function DraggableWidgetWrapper({ widgetData, index = 0 }) {
   const { id, widgetId, x, y } = widgetData;
   const updateWidgetPosition = useDesktopStore((state) => state.updateWidgetPosition);
 
@@ -62,7 +62,12 @@ function DraggableWidgetWrapper({ widgetData }) {
       onPointerMove={handlePointerMove}
       onPointerUp={handlePointerUp}
     >
-      <Component />
+      <div
+        className={styles.widgetEntryWrapper}
+        style={{ animationDelay: `${index * 0.08}s` }}
+      >
+        <Component />
+      </div>
     </div>
   );
 }
@@ -72,8 +77,8 @@ export default function WidgetGrid() {
 
   return (
     <div className={styles.widgetGridLayer}>
-      {activeWidgets.map((w) => (
-        <DraggableWidgetWrapper key={w.id} widgetData={w} />
+      {activeWidgets.map((w, idx) => (
+        <DraggableWidgetWrapper key={w.id} widgetData={w} index={idx} />
       ))}
     </div>
   );

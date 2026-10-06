@@ -2,15 +2,20 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Search, User, Sparkles, ExternalLink, Power, Moon, RotateCcw, Lock } from 'lucide-react';
 import { useDesktopStore } from '../../store/useDesktopStore';
 import { useWindowStore } from '../../store/useWindowStore';
-import { getAppList } from '../../apps/appRegistry';
+import { APP_REGISTRY, getAppList } from '../../apps/appRegistry';
 import { playMechanicalClick, playCloseChime } from '../../lib/soundEngine';
 import styles from './StartMenu.module.css';
 
 const WEB_SHORTCUTS = [
-  { id: 'web-gh', name: 'GITHUB', icon: '/icons/nthing/github.png', url: 'https://github.com/Runixe786/NThing-UI' },
-  { id: 'web-figma', name: 'FIGMA', icon: '/icons/nthing/figma.png', url: 'https://figma.com' },
-  { id: 'web-discord', name: 'DISCORD', icon: '/icons/nthing/discord.png', url: 'https://discord.com' },
-  { id: 'web-reddit', name: 'REDDIT', icon: '/icons/nthing/reddit.png', url: 'https://reddit.com/r/NothingTech' },
+  { id: 'web-browser', name: 'NOTHING WEB', icon: '/icons/nthing/chrome.png', appId: 'browser' },
+  { id: 'web-vsc', name: 'VS CODE', icon: '/icons/nthing/vsc.png', appId: 'vscode' },
+  { id: 'web-spotify', name: 'SPOTIFY', icon: '/icons/nthing/spotify.png', appId: 'spotify' },
+  { id: 'web-yt', name: 'YOUTUBE', icon: '/icons/nthing/youtube.png', appId: 'youtube' },
+  { id: 'web-gh', name: 'GITHUB', icon: '/icons/nthing/github.png', appId: 'github' },
+  { id: 'web-board', name: 'WHITEBOARD', icon: '/icons/nthing/ps.png', appId: 'whiteboard' },
+  { id: 'web-figma', name: 'FIGMA', icon: '/icons/nthing/figma.png', appId: 'figma' },
+  { id: 'web-discord', name: 'DISCORD', icon: '/icons/nthing/discord.png', appId: 'discord' },
+  { id: 'web-reddit', name: 'REDDIT', icon: '/icons/nthing/reddit.png', appId: 'reddit' },
 ];
 
 export default function StartMenu() {
@@ -69,9 +74,12 @@ export default function StartMenu() {
     setStartMenuOpen(false);
   };
 
-  const handleWebLink = (url, name) => {
+  const handleLaunchShortcut = (sc) => {
     playMechanicalClick();
-    window.open(url, '_blank', 'noopener,noreferrer');
+    const app = APP_REGISTRY[sc.appId] || APP_REGISTRY.browser;
+    if (app) {
+      openApp(app);
+    }
     setStartMenuOpen(false);
   };
 
@@ -94,13 +102,7 @@ export default function StartMenu() {
   const handleRestart = () => {
     playMechanicalClick();
     setStartMenuOpen(false);
-    addNotification({
-      title: 'REBOOTING',
-      message: 'Reloading Nothing OS environment...',
-    });
-    setTimeout(() => {
-      window.location.reload();
-    }, 800);
+    setBooting(true);
   };
 
   const handleShutdown = () => {
@@ -189,19 +191,19 @@ export default function StartMenu() {
             </div>
           </div>
 
-          {/* Quick Web Shortcuts */}
+          {/* Real-Life Apps & Web Shortcuts */}
           <div>
             <div className={styles.sectionTitle}>
-              <span>COMMUNITY & TOOLS</span>
-              <ExternalLink size={11} />
+              <span>REAL-LIFE APPS & WEB</span>
+              <Sparkles size={11} style={{ color: 'var(--accent)' }} />
             </div>
             <div className={styles.appGrid}>
               {WEB_SHORTCUTS.map((sc) => (
                 <button
                   key={sc.id}
-                  onClick={() => handleWebLink(sc.url, sc.name)}
+                  onClick={() => handleLaunchShortcut(sc)}
                   className={styles.appCard}
-                  title={`Visit ${sc.name}`}
+                  title={`Open ${sc.name} as Window`}
                 >
                   <div className={styles.appIconWrap}>
                     <img src={sc.icon} alt={sc.name} className={styles.appIconImg} draggable={false} />

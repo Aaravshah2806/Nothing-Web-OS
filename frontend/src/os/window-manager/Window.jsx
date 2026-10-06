@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { useWindowStore } from '../../store/useWindowStore';
 import styles from './Window.module.css';
 
@@ -27,6 +27,7 @@ class WindowErrorBoundary extends React.Component {
 }
 
 export default function Window({ windowData, app }) {
+  const [isInteracting, setIsInteracting] = useState(false);
   const {
     id,
     title,
@@ -62,6 +63,7 @@ export default function Window({ windowData, app }) {
   const handleTitlePointerDown = (e) => {
     if (e.target.closest('button')) return;
     focusWindow(id);
+    setIsInteracting(true);
 
     // If window is currently maximized or snapped, dragging detaches it
     let currentX = x;
@@ -110,6 +112,7 @@ export default function Window({ windowData, app }) {
   const handleTitlePointerUp = (e) => {
     if (isDragging.current) {
       isDragging.current = false;
+      setIsInteracting(false);
       const preview = useWindowStore.getState().snapPreview;
       if (preview && preview.active) {
         snapWindow(id, preview.type);
@@ -126,6 +129,7 @@ export default function Window({ windowData, app }) {
     if (maximized || snapState !== 'none') return;
     e.stopPropagation();
     focusWindow(id);
+    setIsInteracting(true);
 
     isResizing.current = true;
     resizeStart.current = {
@@ -181,6 +185,7 @@ export default function Window({ windowData, app }) {
   const handleResizePointerUp = (e) => {
     if (isResizing.current) {
       isResizing.current = false;
+      setIsInteracting(false);
       try {
         e.currentTarget.releasePointerCapture(e.pointerId);
       } catch {}
@@ -231,7 +236,7 @@ export default function Window({ windowData, app }) {
 
   return (
     <div
-      className={`${styles.window} ${isFocused ? styles.focused : ''} ${isSnapped ? styles.maximized : ''}`}
+      className={`${styles.window} ${isFocused ? styles.focused : ''} ${isSnapped ? styles.maximized : ''} ${isInteracting ? styles.interacting : ''}`}
       style={windowStyle}
       onMouseDown={() => focusWindow(id)}
     >
@@ -280,8 +285,17 @@ export default function Window({ windowData, app }) {
       {/* Body */}
       <div className={styles.body}>
         <WindowErrorBoundary>
-          {AppComponent ? <AppComponent windowId={id} /> : <div>Application not found</div>}
+          {AppComponent ? (
+            <AppComponent
+              windowId={id}
+              windowData={windowData}
+              {...(windowData.customProps || {})}
+            />
+          ) : (
+            <div>Application not found</div>
+          )}
         </WindowErrorBoundary>
+        {isInteracting && <div className={styles.pointerShield} />}
       </div>
 
       {/* 8-Directional Resizing Handles */}

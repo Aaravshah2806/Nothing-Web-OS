@@ -12,6 +12,7 @@ import recorderRoutes from './routes/recorder.routes.js';
 import weatherRoutes from './routes/weather.routes.js';
 import systemRoutes from './routes/system.routes.js';
 import aiRoutes from './routes/ai.routes.js';
+import proxyRoutes from './routes/proxy.routes.js';
 import { notFound, errorHandler } from './middleware/errorHandler.js';
 
 // Load environment variables
@@ -21,10 +22,12 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const CLIENT_URL = process.env.CLIENT_URL || 'http://localhost:5173';
 
-// Security Headers
+// Security Headers (configured to allow in-page desktop window iframing)
 app.use(
   helmet({
     crossOriginResourcePolicy: { policy: 'cross-origin' },
+    frameguard: false,
+    contentSecurityPolicy: false,
   })
 );
 
@@ -85,6 +88,7 @@ app.use('/api/recorder', recorderRoutes);
 app.use('/api/weather', weatherRoutes);
 app.use('/api/system', systemRoutes);
 app.use('/api/ai', aiRoutes);
+app.use('/api/proxy', proxyRoutes);
 
 // Error Handling Middleware
 app.use(notFound);

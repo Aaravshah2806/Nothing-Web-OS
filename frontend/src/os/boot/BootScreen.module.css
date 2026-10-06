@@ -1,75 +1,292 @@
-.overlay {
+/* ==============================================================================
+   NOTHING OS / NTHING WEBOS BOOT ANIMATION
+   Monochrome Black #000, White #FFF, Nothing Red #E2201F
+   High Contrast • Dot-Matrix • Minimal • 60fps CSS Keyframes
+   ============================================================================== */
+
+.bootOverlay {
   position: fixed;
   inset: 0;
-  background: #000000;
+  background-color: #000000;
   z-index: 99999999;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  gap: 40px;
+  justify-content: center;
   user-select: none;
+  overflow: hidden;
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.6s;
 }
 
-.logoBlock {
+.bootOverlayFading {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* 0.0 - 0.8s: Faint white dot-grid background */
+.dotGrid {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.12) 1.5px, transparent 1.5px);
+  background-size: 24px 24px;
+  background-position: center center;
+  opacity: 0;
+  animation: gridFadeIn 0.8s ease-out forwards;
+  pointer-events: none;
+}
+
+@keyframes gridFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* CRT Scanline & Subtle Flicker */
+.crtOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%,
+    rgba(0, 0, 0, 0.35) 50%
+  );
+  background-size: 100% 4px;
+  pointer-events: none;
+  opacity: 0.7;
+  animation: crtFlicker 0.12s infinite alternate;
+}
+
+@keyframes crtFlicker {
+  0% { opacity: 0.6; }
+  100% { opacity: 0.75; }
+}
+
+/* Central Stage Container */
+.centerStage {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
+  justify-content: center;
+  gap: 20px;
+  z-index: 2;
+  animation: cameraZoomIn 2.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes cameraZoomIn {
+  0% { transform: scale(0.96); }
+  100% { transform: scale(1.02); }
+}
+
+/* 0.0 - 0.8s: Pulsing Red LED Dot in Center */
+.centerLedDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #E2201F;
+  box-shadow: 0 0 16px #E2201F, 0 0 4px #E2201F;
+  animation: ledPulse 0.7s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
+}
+
+@keyframes ledPulse {
+  0% {
+    transform: scale(0.7);
+    opacity: 0.5;
+    box-shadow: 0 0 6px #E2201F;
+  }
+  100% {
+    transform: scale(1.3);
+    opacity: 1;
+    box-shadow: 0 0 20px #E2201F;
+  }
+}
+
+/* Glyph Light Strips (flash left and right) */
+.glyphStripLeft,
+.glyphStripRight {
+  position: absolute;
+  top: 50%;
+  width: 60px;
+  height: 2px;
+  background: #FFFFFF;
+  box-shadow: 0 0 8px #FFFFFF;
+  opacity: 0;
+}
+
+.glyphStripLeft {
+  right: calc(100% + 24px);
+  animation: glyphSweepLeft 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.6s forwards;
+}
+
+.glyphStripRight {
+  left: calc(100% + 24px);
+  animation: glyphSweepRight 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.6s forwards;
+}
+
+@keyframes glyphSweepLeft {
+  0% {
+    opacity: 0;
+    transform: scaleX(0);
+    transform-origin: right;
+  }
+  50% {
+    opacity: 1;
+    transform: scaleX(1);
+    transform-origin: right;
+  }
+  100% {
+    opacity: 0.3;
+    transform: scaleX(0.7);
+    transform-origin: right;
+  }
+}
+
+@keyframes glyphSweepRight {
+  0% {
+    opacity: 0;
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+  50% {
+    opacity: 1;
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+  100% {
+    opacity: 0.3;
+    transform: scaleX(0.7);
+    transform-origin: left;
+  }
+}
+
+/* Dot-Matrix Brand Logo Typography */
+.logoWrapper {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  position: relative;
 }
 
 .logoText {
-  font-family: var(--font-display);
-  font-size: 38px;
-  letter-spacing: 4px;
+  font-family: var(--font-ndot), 'Nothing5x7', monospace;
+  font-size: 54px;
+  font-weight: 700;
+  letter-spacing: 6px;
   color: #FFFFFF;
-  animation: glowPulse 2s ease-in-out infinite alternate;
+  line-height: 1;
+  text-transform: uppercase;
+  display: flex;
+  align-items: baseline;
 }
 
-@keyframes glowPulse {
+.letter {
+  display: inline-block;
+  opacity: 0;
+  animation: letterTypeIn 0.08s steps(1) forwards;
+}
+
+@keyframes letterTypeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+/* Red Dot Period */
+.redPeriod {
+  color: #E2201F;
+  font-family: var(--font-ndot), 'Nothing5x7', monospace;
+  font-size: 58px;
+  line-height: 1;
+  display: inline-block;
+  opacity: 0;
+  animation: periodPop 0.2s cubic-bezier(0.16, 1, 0.3, 1) 1.2s forwards;
+  text-shadow: 0 0 14px rgba(226, 32, 31, 0.8);
+}
+
+@keyframes periodPop {
   0% {
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    opacity: 0;
+    transform: scale(0);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.3);
   }
   100% {
-    text-shadow: 0 0 24px rgba(255, 59, 48, 0.6);
+    opacity: 1;
+    transform: scale(1);
   }
 }
 
-.subtext {
-  font-family: var(--font-body);
-  font-size: 11px;
-  letter-spacing: 2px;
-  color: var(--text-muted);
-}
-
-.progressContainer {
+/* 1.6 - 2.5s: Thin Red Loading Progress Bar & Telemetry */
+.progressBlock {
   width: 280px;
   display: flex;
   flex-direction: column;
   gap: 8px;
+  opacity: 0;
+  animation: progressBlockFade 0.3s ease-out 1.1s forwards;
 }
 
-.progressBar {
+@keyframes progressBlockFade {
+  to { opacity: 1; }
+}
+
+.progressTrack {
   width: 100%;
-  height: 4px;
-  background: #1A1A1A;
-  border-radius: var(--radius-pill);
+  height: 2px;
+  background: #181818;
+  position: relative;
   overflow: hidden;
-  border: 1px solid var(--border-subtle);
 }
 
 .progressFill {
   height: 100%;
-  background: var(--accent);
-  box-shadow: 0 0 10px var(--accent-glow);
-  transition: width 0.08s linear;
+  background: #E2201F;
+  box-shadow: 0 0 8px #E2201F;
+  transition: width 0.05s linear;
 }
 
-.progressLabel {
+.metaRow {
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  font-family: var(--font-display);
+  font-family: var(--font-pixel), monospace;
   font-size: 9px;
-  color: var(--text-secondary);
-  letter-spacing: 1px;
+  color: #8C8C8C;
+  letter-spacing: 1.5px;
+}
+
+.metaStatus {
+  color: #FFFFFF;
+}
+
+.metaPercent {
+  color: #E2201F;
+  font-weight: 700;
+}
+
+/* Skip / Enter Hint */
+.skipPrompt {
+  position: absolute;
+  bottom: 28px;
+  font-family: var(--font-pixel), monospace;
+  font-size: 8px;
+  letter-spacing: 2px;
+  color: #444444;
+  opacity: 0;
+  animation: promptFade 0.6s ease-out 1.5s forwards;
+  transition: color 0.15s;
+}
+
+.skipPrompt:hover {
+  color: #888888;
+}
+
+@keyframes promptFade {
+  to { opacity: 1; }
 }

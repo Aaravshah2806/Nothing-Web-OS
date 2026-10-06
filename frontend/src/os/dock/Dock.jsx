@@ -63,7 +63,7 @@ export default function Dock() {
 
         {/* Pinned / Running Apps */}
         <div className={styles.appsList}>
-          {apps.map((app) => {
+          {apps.filter((app) => app.pinned || windows.some((w) => w.appId === app.id)).map((app) => {
             const AppIcon = app.icon;
             const openInstance = windows.find((w) => w.appId === app.id);
             const isOpen = Boolean(openInstance);

@@ -13,16 +13,17 @@ const DEFAULT_ACTIVE_WIDGETS = [
 ];
 
 const DEFAULT_DESKTOP_ICONS = [
-  { id: 'icon-files', name: 'FILES', iconKey: 'Folder', imageIcon: '/icons/nthing/explorer.png', appId: 'files', x: 28, y: 480 },
-  { id: 'icon-terminal', name: 'TERMINAL', iconKey: 'Terminal', imageIcon: '/icons/nthing/cmd.png', appId: 'terminal', x: 28, y: 580 },
-  { id: 'icon-notes', name: 'NOTES', iconKey: 'FileText', imageIcon: '/icons/nthing/notepad.png', appId: 'notes', x: 120, y: 480 },
-  { id: 'icon-glyph', name: 'GLYPH LAB', iconKey: 'Zap', imageIcon: '/icons/nthing/widgets1.png', appId: 'glyph', x: 120, y: 580 },
-  { id: 'icon-pomodoro', name: 'FOCUS TIMER', iconKey: 'Timer', imageIcon: '/icons/nthing/widgets3.png', appId: 'pomodoro', x: 212, y: 480 },
-  { id: 'icon-recorder', name: 'RECORDER', iconKey: 'Mic', imageIcon: '/icons/nthing/widgets2.png', appId: 'recorder', x: 212, y: 580 },
-  { id: 'icon-devtools', name: 'DEV TOOLS', iconKey: 'Code', imageIcon: '/icons/nthing/vsc.png', appId: 'devtools', x: 304, y: 480 },
-  { id: 'icon-ai', name: 'GLYPH AI', iconKey: 'Sparkles', imageIcon: '/icons/nthing/gemini.png', appId: 'assistant', x: 304, y: 580 },
-  { id: 'icon-music', name: 'MUSIC', iconKey: 'Music', imageIcon: '/icons/nthing/spotify.png', appId: 'music', x: 396, y: 480 },
-  { id: 'icon-trash', name: 'TRASH', iconKey: 'Trash2', imageIcon: '/icons/nthing/bin.png', appId: 'files', x: 396, y: 580 },
+  { id: 'icon-browser', name: 'NOTHING WEB', iconKey: 'Globe', imageIcon: '/icons/nthing/chrome.png', appId: 'browser', x: 28, y: 480 },
+  { id: 'icon-vscode', name: 'VS CODE', iconKey: 'Code', imageIcon: '/icons/nthing/vsc.png', appId: 'vscode', x: 28, y: 580 },
+  { id: 'icon-spotify', name: 'SPOTIFY', iconKey: 'Disc', imageIcon: '/icons/nthing/spotify.png', appId: 'spotify', x: 120, y: 480 },
+  { id: 'icon-youtube', name: 'YOUTUBE', iconKey: 'Tv', imageIcon: '/icons/nthing/youtube.png', appId: 'youtube', x: 120, y: 580 },
+  { id: 'icon-github', name: 'GITHUB', iconKey: 'Globe', imageIcon: '/icons/nthing/github.png', appId: 'github', x: 212, y: 480 },
+  { id: 'icon-whiteboard', name: 'WHITEBOARD', iconKey: 'Edit3', imageIcon: '/icons/nthing/ps.png', appId: 'whiteboard', x: 212, y: 580 },
+  { id: 'icon-files', name: 'FILES', iconKey: 'Folder', imageIcon: '/icons/nthing/explorer.png', appId: 'files', x: 304, y: 480 },
+  { id: 'icon-terminal', name: 'TERMINAL', iconKey: 'Terminal', imageIcon: '/icons/nthing/cmd.png', appId: 'terminal', x: 304, y: 580 },
+  { id: 'icon-notes', name: 'NOTES', iconKey: 'FileText', imageIcon: '/icons/nthing/notepad.png', appId: 'notes', x: 396, y: 480 },
+  { id: 'icon-ai', name: 'GLYPH AI', iconKey: 'Sparkles', imageIcon: '/icons/nthing/gemini.png', appId: 'assistant', x: 396, y: 580 },
+  { id: 'icon-trash', name: 'TRASH', iconKey: 'Trash2', imageIcon: '/icons/nthing/bin.png', appId: 'files', x: 488, y: 580 },
 ];
 
 export const useDesktopStore = create(

@@ -1,0 +1,151 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  background: #181818;
+  color: #cccccc;
+  overflow: hidden;
+  user-select: none;
+}
+
+.subHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 12px;
+  background: #1e1e1e;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  font-family: var(--font-body, monospace);
+  font-size: 11px;
+}
+
+.leftInfo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.titleBadge {
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  color: #ffffff;
+}
+
+.dotSeparator {
+  color: rgba(255, 255, 255, 0.2);
+}
+
+.runtimeTag {
+  font-size: 10px;
+  color: #007acc;
+  letter-spacing: 1px;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.actionBtn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-xs, 4px);
+  padding: 4px 8px;
+  color: #cccccc;
+  font-family: var(--font-body, monospace);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all var(--transition-fast, 0.15s ease);
+}
+
+.actionBtn:hover, .activeActionBtn {
+  background: #007acc;
+  border-color: #007acc;
+  color: #ffffff;
+}
+
+.iconBtn {
+  width: 26px;
+  height: 24px;
+  border-radius: var(--radius-xs, 4px);
+  background: transparent;
+  border: 1px solid transparent;
+  color: #888888;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-fast, 0.15s ease);
+}
+
+.iconBtn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+}
+
+.repoBar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  background: #141414;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  animation: slideDown 0.15s ease-out;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.repoInput {
+  flex: 1;
+  background: #1e1e1e;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+  padding: 4px 10px;
+  color: #ffffff;
+  font-size: 12px;
+  font-family: var(--font-body, monospace);
+  outline: none;
+}
+
+.repoInput:focus {
+  border-color: #007acc;
+}
+
+.repoLoadBtn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: #007acc;
+  border: none;
+  border-radius: 4px;
+  padding: 4px 10px;
+  color: #ffffff;
+  font-family: var(--font-body, monospace);
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.frameContainer {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  background: #1e1e1e;
+}
+
+.iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: #1e1e1e;
+}

@@ -106,6 +106,18 @@
   background: var(--surface-1);
 }
 
+.pointerShield {
+  position: absolute;
+  inset: 0;
+  z-index: 9999;
+  background: transparent;
+  cursor: inherit;
+}
+
+.interacting iframe {
+  pointer-events: none !important;
+}
+
 /* 8-Directional Resizing */
 .resizeBorder {
   position: absolute;
